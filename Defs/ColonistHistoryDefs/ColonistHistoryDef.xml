@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <ColonistHistory.ColonistHistoryDef>
+        <defName>TMB_SkillLevelsInt</defName>
+        <label>Skill levels (int)</label>
+        <description>Skill levels as integer.</description>
+        <workerClass>ColonistHistory.CHW_SkillLevelsInt</workerClass>
+        <valueType>int</valueType>
+        <defType>SkillDef</defType>
+    </ColonistHistory.ColonistHistoryDef>
+
+    <ColonistHistory.ColonistHistoryDef>
+        <defName>TMB_SkillLevelsFloat</defName>
+        <label>Skill levels (float)</label>
+        <description>Skill levels as float.</description>
+        <workerClass>ColonistHistory.CHW_SkillLevelsFloat</workerClass>
+        <defaultOutput>false</defaultOutput>
+        <valueType>float</valueType>
+        <defType>SkillDef</defType>
+    </ColonistHistory.ColonistHistoryDef>
+
+    <ColonistHistory.ColonistHistoryDef>
+        <defName>TMB_AgeBiologicalYears</defName>
+        <label>Biological age</label>
+        <description>Biological age as integer.</description>
+        <workerClass>ColonistHistory.CHW_AgeBiologicalYears</workerClass>
+        <valueType>int</valueType>
+    </ColonistHistory.ColonistHistoryDef>
+
+    <ColonistHistory.ColonistHistoryDef>
+        <defName>TMB_PrimaryEquipment</defName>
+        <label>Primary equipment</label>
+        <description>Primary equipment as string.</description>
+        <workerClass>ColonistHistory.CHW_PrimaryEquipment</workerClass>
+        <valueType>string</valueType>
+    </ColonistHistory.ColonistHistoryDef>
+
+    <ColonistHistory.ColonistHistoryDef>
+        <defName>TMB_Hediffs</defName>
+        <label>Hediffs</label>
+        <description>Hediffs as string list.</description>
+        <workerClass>ColonistHistory.CHW_Hediffs</workerClass>
+        <valueType>string</valueType>
+    </ColonistHistory.ColonistHistoryDef>
+
+    <ColonistHistory.ColonistHistoryDef>
+        <defName>TMB_RecordsMisc</defName>
+        <label>Records (Misc)</label>
+        <description>Records (Misc) as float.</description>
+        <workerClass>ColonistHistory.CHW_RecordsMisc</workerClass>
+        <valueType>float</valueType>
+        <defType>RecordDef</defType>
+    </ColonistHistory.ColonistHistoryDef>
+
+    <ColonistHistory.ColonistHistoryDef>
+        <defName>TMB_RecordsTime</defName>
+        <label>Records (Time)</label>
+        <description>Records (Time) as int.</description>
+        <workerClass>ColonistHistory.CHW_RecordsTime</workerClass>
+        <valueType>int</valueType>
+        <defType>RecordDef</defType>
+    </ColonistHistory.ColonistHistoryDef>
+
+</Defs>

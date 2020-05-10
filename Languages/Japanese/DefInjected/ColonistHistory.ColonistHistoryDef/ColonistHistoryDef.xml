@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+    <TMB_SkillLevelsInt.label>スキルレベル(整数)</TMB_SkillLevelsInt.label>
+    <TMB_SkillLevelsInt.description>各スキルのレベルを整数値で保存します.</TMB_SkillLevelsInt.description>
+
+    <TMB_SkillLevelsFloat.label>スキルレベル(実数)</TMB_SkillLevelsFloat.label>
+    <TMB_SkillLevelsFloat.description>各スキルのレベルを実数値で保存します.</TMB_SkillLevelsFloat.description>
+
+    <TMB_AgeBiologicalYears.label>年齢</TMB_AgeBiologicalYears.label>
+    <TMB_AgeBiologicalYears.description>年齢を実数値で保存します.</TMB_AgeBiologicalYears.description>
+
+    <TMB_PrimaryEquipment.label>装備中の武器</TMB_PrimaryEquipment.label>
+    <TMB_PrimaryEquipment.description>装備中の武器の名前を文字列で保存します.</TMB_PrimaryEquipment.description>
+
+    <TMB_Hediffs.label>健康状態</TMB_Hediffs.label>
+    <TMB_Hediffs.description>健康状態名の一覧を文字列の配列で保存します.</TMB_Hediffs.description>
+
+    <TMB_RecordsMisc.label>記録(その他)</TMB_RecordsMisc.label>
+    <TMB_RecordsMisc.description>記録(その他)の値を実数値で保存します.</TMB_RecordsMisc.description>
+
+    <TMB_RecordsTime.label>記録(時)</TMB_RecordsTime.label>
+    <TMB_RecordsTime.description>記録(時)の値を整数値で保存します.</TMB_RecordsTime.description>
+
+</LanguageData>
