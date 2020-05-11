@@ -69,7 +69,7 @@ namespace ColonistHistory {
         }
 
         private static bool TryScribeDefValueInternal<T>(ref Def value, string labelDefName, string labelDefType, Type type) where T : Def {
-            if (type != null) {
+            if (type != null && type == typeof(T)) {
                 string defName = "";
                 if (Scribe.mode == LoadSaveMode.Saving) {
                     defName = value.defName;
