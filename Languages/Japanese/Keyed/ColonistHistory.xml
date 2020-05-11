@@ -6,6 +6,11 @@
 	<ColonistHistoryWorker.SettingsSaveFolderPath>ファイルを保存するフォルダパス</ColonistHistoryWorker.SettingsSaveFolderPath>
 	<ColonistHistoryWorker.SettingsOutputRecords>保存する項目</ColonistHistoryWorker.SettingsOutputRecords>
 
+	<!-- MainTabWindow_ColonistHistory -->
+	<ColonistHistory.TabHome>ホーム</ColonistHistory.TabHome>
+	<ColonistHistory.TabTable>表</ColonistHistory.TabTable>
+	<ColonistHistory.TabGraph>グラフ</ColonistHistory.TabGraph>
+
 	<!-- GameComponent_ColonistHistoryRecorder -->
 	<ColonistHistoryWorker.SaveColonistHistoriesFileAs>入植者の記録を次のファイル名で保存しました. "{0}"</ColonistHistoryWorker.SaveColonistHistoriesFileAs>
 
