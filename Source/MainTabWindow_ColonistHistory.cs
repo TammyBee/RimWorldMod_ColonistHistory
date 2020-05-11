@@ -14,6 +14,12 @@ namespace ColonistHistory {
 
 		private static MainTabWindow_ColonistHistory.TabType curTab = MainTabWindow_ColonistHistory.TabType.Home;
 
+		private GameComponent_ColonistHistoryRecorder CompRecorder {
+			get {
+				return Current.Game.GetComponent<GameComponent_ColonistHistoryRecorder>();
+			}
+		}
+
 		public override Vector2 RequestedTabSize {
 			get {
 				return new Vector2(1010f, 640f);
@@ -55,7 +61,22 @@ namespace ColonistHistory {
 		}
 
 		private void DoHomePage(Rect rect) {
+			rect.yMin += 17f;
+			Text.Font = GameFont.Small;
+			GUI.BeginGroup(rect);
 
+			List<ListableOption> list = new List<ListableOption>();
+			list.Add(new ListableOption("ColonistHistory.ForceRecordButton".Translate(), delegate{
+				CompRecorder.Record(true);
+			}, null));
+			list.Add(new ListableOption("ColonistHistory.OutputRecordButton".Translate(), delegate {
+				CompRecorder.Save();
+			}, null));
+
+			Rect rect2 = new Rect(0f, 0f, 170f, rect.height);
+			OptionListingUtility.DrawOptionListing(rect2, list);
+
+			GUI.EndGroup();
 		}
 
 		private void DoTablePage(Rect rect) {

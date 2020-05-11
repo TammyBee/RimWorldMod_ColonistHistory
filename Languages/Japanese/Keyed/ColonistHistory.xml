@@ -11,6 +11,9 @@
 	<ColonistHistory.TabTable>表</ColonistHistory.TabTable>
 	<ColonistHistory.TabGraph>グラフ</ColonistHistory.TabGraph>
 
+	<ColonistHistory.ForceRecordButton>現在の情報を記録</ColonistHistory.ForceRecordButton>
+	<ColonistHistory.OutputRecordButton>ファイル出力</ColonistHistory.OutputRecordButton>
+
 	<!-- GameComponent_ColonistHistoryRecorder -->
 	<ColonistHistoryWorker.SaveColonistHistoriesFileAs>入植者の記録を次のファイル名で保存しました. "{0}"</ColonistHistoryWorker.SaveColonistHistoriesFileAs>
 
