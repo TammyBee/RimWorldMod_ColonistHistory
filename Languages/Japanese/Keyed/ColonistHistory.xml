@@ -14,6 +14,11 @@
 	<ColonistHistory.ForceRecordButton>現在の情報を記録</ColonistHistory.ForceRecordButton>
 	<ColonistHistory.OutputRecordButton>ファイル出力</ColonistHistory.OutputRecordButton>
 
+	<ColonistHistory.NoRecord>無し</ColonistHistory.NoRecord>
+	<ColonistHistory.LastRecordIsManual>(手動)</ColonistHistory.LastRecordIsManual>
+	<ColonistHistory.LastRecordDateTime>最後に記録した日時: {0} {1}</ColonistHistory.LastRecordDateTime>
+	<ColonistHistory.NextRecordTimeLeft>次の自動記録まで {0}</ColonistHistory.NextRecordTimeLeft>
+
 	<!-- GameComponent_ColonistHistoryRecorder -->
 	<ColonistHistoryWorker.SaveColonistHistoriesFileAs>入植者の記録を次のファイル名で保存しました. "{0}"</ColonistHistoryWorker.SaveColonistHistoriesFileAs>
 

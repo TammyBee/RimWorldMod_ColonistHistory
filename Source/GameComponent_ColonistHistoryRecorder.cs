@@ -8,20 +8,55 @@ using Verse;
 
 namespace ColonistHistory {
     public class GameComponent_ColonistHistoryRecorder : GameComponent {
-        private int lastRecordTick = -1;
+        private int lastAutoRecordTick = -1;
+        private int lastManualRecordTick = -1;
+        private bool lastRecordIsManual = false;
         private int firstTile = -1; 
         private Dictionary<Pawn, ColonistHistoryDataList> colonistHistories = new Dictionary<Pawn, ColonistHistoryDataList>();
 
         private List<Pawn> tmpPawns = new List<Pawn>();
         private List<ColonistHistoryDataList> tmpColonistHistories = new List<ColonistHistoryDataList>();
 
-
-        private int NextRecordTick {
+        public int NextRecordTick {
             get {
-                if (this.lastRecordTick != -1) {
-                    return this.lastRecordTick + ColonistHistoryMod.Settings.recordingIntervalHours * GenDate.TicksPerHour;
+                if (this.LastAutoRecordTick != -1) {
+                    return this.LastAutoRecordTick + ColonistHistoryMod.Settings.recordingIntervalHours * GenDate.TicksPerHour;
                 }
                 return -1;
+            }
+        }
+
+        public int LastAutoRecordTick {
+            get {
+                return this.lastAutoRecordTick;
+            }
+        }
+
+        public int LastManualRecordTick {
+            get {
+                return this.lastManualRecordTick;
+            }
+        }
+
+        public int LastRecordTick {
+            get {
+                if (LastRecordIsManual) {
+                    return LastManualRecordTick;
+                } else {
+                    return LastAutoRecordTick;
+                }
+            }
+        }
+
+        public string LastRecordDateTime {
+            get {
+                return Utils.ConvertToDateTimeString(this.LastRecordTick, this.firstTile);
+            }
+        }
+
+        public bool LastRecordIsManual {
+            get {
+                return lastRecordIsManual;
             }
         }
 
@@ -40,7 +75,9 @@ namespace ColonistHistory {
         }
 
         public GameComponent_ColonistHistoryRecorder(Game game) {
-            this.lastRecordTick = -1;
+            this.lastAutoRecordTick = -1;
+            this.lastManualRecordTick = -1;
+            this.lastRecordIsManual = false;
             this.colonistHistories = new Dictionary<Pawn, ColonistHistoryDataList>();
         }
 
@@ -50,7 +87,7 @@ namespace ColonistHistory {
             }
         }
 
-        public bool Record(bool forceRecord = false) {
+        public bool Record(bool manualRecord = false) {
             int currentTick = Current.Game.tickManager.TicksAbs;
             List<Pawn> colonists = Find.ColonistBar.GetColonistsInOrder();
             if (colonists.NullOrEmpty()) {
@@ -65,12 +102,17 @@ namespace ColonistHistory {
                 if (!this.colonistHistories.ContainsKey(colonist)) {
                     this.colonistHistories[colonist] = new ColonistHistoryDataList(colonist);
                 }
-                ColonistHistoryData colonistHistoryData = new ColonistHistoryData(currentTick, this.firstTile, forceRecord, colonist);
+                ColonistHistoryData colonistHistoryData = new ColonistHistoryData(currentTick, this.firstTile, manualRecord, colonist);
                 this.colonistHistories[colonist].Add(colonistHistoryData, colonist);
             }
-            if (!forceRecord) {
-                this.lastRecordTick = currentTick;
+
+            this.lastRecordIsManual = manualRecord;
+            if (manualRecord) {
+                this.lastManualRecordTick = currentTick;
+            } else {
+                this.lastAutoRecordTick = currentTick;
             }
+
             return true;
         }
 
@@ -89,7 +131,9 @@ namespace ColonistHistory {
         }
 
         public override void ExposeData() {
-            Scribe_Values.Look(ref this.lastRecordTick, "lastRecordTick", -1);
+            Scribe_Values.Look(ref this.lastAutoRecordTick, "lastRecordTick", -1);
+            Scribe_Values.Look(ref this.lastManualRecordTick, "lastManualRecordTick", -1);
+            Scribe_Values.Look(ref this.lastRecordIsManual, "lastRecordIsManual", false);
             Scribe_Values.Look(ref this.firstTile, "firstTile", -1);
             Scribe_Collections.Look(ref this.colonistHistories, "colonistHistories", LookMode.Reference ,LookMode.Deep, ref this.tmpPawns, ref this.tmpColonistHistories);
         }

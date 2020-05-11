@@ -65,6 +65,7 @@ namespace ColonistHistory {
 			Text.Font = GameFont.Small;
 			GUI.BeginGroup(rect);
 
+
 			List<ListableOption> list = new List<ListableOption>();
 			list.Add(new ListableOption("ColonistHistory.ForceRecordButton".Translate(), delegate{
 				CompRecorder.Record(true);
@@ -73,8 +74,31 @@ namespace ColonistHistory {
 				CompRecorder.Save();
 			}, null));
 
-			Rect rect2 = new Rect(0f, 0f, 170f, rect.height);
-			OptionListingUtility.DrawOptionListing(rect2, list);
+			Rect rectButtonList = new Rect(0f, 0f, 170f, rect.height);
+			OptionListingUtility.DrawOptionListing(rectButtonList, list);
+
+
+			StringBuilder stringBuilder = new StringBuilder();
+			{
+				string lastRecordDateTimeString = "ColonistHistory.NoRecord".Translate();
+				if (CompRecorder.LastRecordTick != -1) {
+					lastRecordDateTimeString = CompRecorder.LastRecordDateTime;
+				}
+				string lastRecordIsManual = "";
+				if (CompRecorder.LastRecordIsManual) {
+					lastRecordIsManual = "ColonistHistory.LastRecordIsManual".Translate();
+				}
+				stringBuilder.AppendLine("ColonistHistory.LastRecordDateTime".Translate(lastRecordDateTimeString, lastRecordIsManual));
+			}
+
+			{
+				int leftTick = CompRecorder.NextRecordTick - Current.Game.tickManager.TicksAbs;
+				stringBuilder.AppendLine("ColonistHistory.NextRecordTimeLeft".Translate(leftTick.ToStringTicksToPeriod()));
+			}
+
+			Text.Anchor = TextAnchor.UpperLeft;
+			Widgets.Label(new Rect(rectButtonList.xMax + 16f , 0f, rect.width - rectButtonList.xMax - 16f, rect.height), stringBuilder.ToString());
+
 
 			GUI.EndGroup();
 		}

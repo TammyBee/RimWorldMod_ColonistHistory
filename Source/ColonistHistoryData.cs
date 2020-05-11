@@ -18,10 +18,7 @@ namespace ColonistHistory {
             this.recordTick = currentTick;
             this.forceRecord = forceRecord;
             this.records = new ColonistHistoryDataRecords(pawn);
-
-            Vector2 vector = Find.WorldGrid.LongLatOf(tile);
-            string hourString = GenDate.HourInteger((long)Find.TickManager.TicksAbs, vector.x) + "LetterHour".Translate();
-            this.dateString = "ColonistHistoryWorker.DateString".Translate(GenDate.DateReadoutStringAt((long)Find.TickManager.TicksAbs, vector), hourString);
+            this.dateString = Utils.ConvertToDateTimeString(Find.TickManager.TicksAbs, tile);
         }
 
         public void ExposeData() {
