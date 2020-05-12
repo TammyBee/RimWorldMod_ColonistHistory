@@ -34,6 +34,15 @@ namespace ColonistHistory {
             }
         }
 
+        public string ValueString {
+            get {
+                if (this.IsList) {
+                    return this.Parent.Worker.GetValuesAsString(this);
+                }
+                return this.Parent.Worker.GetValueAsString(this);
+            }
+        }
+
         public ColonistHistoryRecord() {
 
         }

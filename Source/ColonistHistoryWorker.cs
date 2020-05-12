@@ -15,6 +15,14 @@ namespace ColonistHistory {
             return "ColonistHistoryWorker.ColonistHistoryRecordLabel".Translate(def.LabelCap,label);
         }
 
+        public virtual string GetValuesAsString(ColonistHistoryRecord record) {
+            return string.Join(", ",record.Values.Select(value => this.GetValuesAsStringInternal(value)));
+        }
+
+        protected virtual string GetValuesAsStringInternal(object value) {
+            return value.ToString();
+        }
+
         public virtual string GetValueAsString(ColonistHistoryRecord record) {
             return record.Value.ToStringSafe();
         }

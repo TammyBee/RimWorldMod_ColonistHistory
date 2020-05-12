@@ -74,6 +74,14 @@ namespace ColonistHistory {
             }
         }
 
+        public IEnumerable<Pawn> Colonists {
+            get {
+                foreach (Pawn p in this.colonistHistories.Keys.OrderBy(x => x.thingIDNumber)) {
+                    yield return p;
+                }
+            }
+        }
+
         public GameComponent_ColonistHistoryRecorder(Game game) {
             this.lastAutoRecordTick = -1;
             this.lastManualRecordTick = -1;
@@ -85,6 +93,10 @@ namespace ColonistHistory {
             if (Current.Game.tickManager.TicksAbs >= NextRecordTick) {
                 Record();
             }
+        }
+
+        public ColonistHistoryDataList GetRecords(Pawn p) {
+            return this.colonistHistories[p];
         }
 
         public bool Record(bool manualRecord = false) {

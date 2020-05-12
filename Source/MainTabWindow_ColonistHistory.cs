@@ -14,6 +14,10 @@ namespace ColonistHistory {
 
 		private static MainTabWindow_ColonistHistory.TabType curTab = MainTabWindow_ColonistHistory.TabType.Home;
 
+		private static Pawn curPawn = null;
+
+		private static int curDateIndex = 0;
+
 		private GameComponent_ColonistHistoryRecorder CompRecorder {
 			get {
 				return Current.Game.GetComponent<GameComponent_ColonistHistoryRecorder>();
@@ -22,7 +26,7 @@ namespace ColonistHistory {
 
 		public override Vector2 RequestedTabSize {
 			get {
-				return new Vector2(1010f, 640f);
+				return new Vector2(1010f, 800f);
 			}
 		}
 
@@ -34,10 +38,19 @@ namespace ColonistHistory {
 			}, () => MainTabWindow_ColonistHistory.curTab == MainTabWindow_ColonistHistory.TabType.Home));
 			this.tabs.Add(new TabRecord("ColonistHistory.TabTable".Translate(), delegate () {
 				MainTabWindow_ColonistHistory.curTab = MainTabWindow_ColonistHistory.TabType.Table;
+				RefreshDrawEntries();
 			}, () => MainTabWindow_ColonistHistory.curTab == MainTabWindow_ColonistHistory.TabType.Table));
 			this.tabs.Add(new TabRecord("ColonistHistory.TabGraph".Translate(), delegate () {
 				MainTabWindow_ColonistHistory.curTab = MainTabWindow_ColonistHistory.TabType.Graph;
 			}, () => MainTabWindow_ColonistHistory.curTab == MainTabWindow_ColonistHistory.TabType.Graph));
+
+			MainTabWindow_ColonistHistory.curPawn = CompRecorder.Colonists.First();
+			RecordReportUtility.Reset();
+			RefreshDrawEntries();
+
+			Pawn pawn = MainTabWindow_ColonistHistory.curPawn;
+			int lastIndex = CompRecorder.GetRecords(pawn).log.Count - 1;
+			MainTabWindow_ColonistHistory.curDateIndex = Mathf.Clamp(MainTabWindow_ColonistHistory.curDateIndex, 0, lastIndex);
 		}
 
 		public override void DoWindowContents(Rect rect) {
@@ -104,7 +117,80 @@ namespace ColonistHistory {
 		}
 
 		private void DoTablePage(Rect rect) {
+			rect.yMin += 16f;
+			DrawHeaderOnTable(new Rect(rect.x, rect.y, rect.width, 32f));
 
+			rect.yMin += 40f;
+			DrawRecordInfoOnTable(rect);
+		}
+
+		private Vector2 DrawHeaderOnTable(Rect rect) {
+			Text.Font = GameFont.Small;
+			Text.Anchor = TextAnchor.MiddleLeft;
+			GUI.BeginGroup(rect);
+			float num = 0f;
+			float height = rect.height;
+
+			{
+				Rect rectButton = new Rect(num, 0f, 140f, height);
+				if (Widgets.ButtonText(rectButton, MainTabWindow_ColonistHistory.curPawn.Name.ToStringShort)) {
+					List<FloatMenuOption> list = new List<FloatMenuOption>();
+					foreach (Pawn colonist in CompRecorder.Colonists) {
+						Pawn p = colonist;
+						list.Add(new FloatMenuOption(p.Name.ToStringShort, delegate () {
+							MainTabWindow_ColonistHistory.curPawn = p;
+							RefreshDrawEntries();
+						}, MenuOptionPriority.Default, null, null, 0f, null, null));
+					}
+					Find.WindowStack.Add(new FloatMenu(list));
+				}
+				num += rectButton.width;
+			}
+			num += 20f;
+
+			Pawn pawn = MainTabWindow_ColonistHistory.curPawn;
+			int lastIndex = CompRecorder.GetRecords(pawn).log.Count - 1;
+			int currentIndex = curDateIndex;
+			{
+				Rect rectButton = new Rect(num, 0f, height, height);
+				if (Widgets.ButtonText(rectButton, "<") && curDateIndex > 0) {
+					curDateIndex--;
+				}
+				num += rectButton.width;
+			}
+			num += 4f;
+			{
+				string labelSlider = CompRecorder.GetRecords(pawn).log[curDateIndex].dateString;
+
+				Rect rectSlider = new Rect(num, 0f, 640f, height);
+				curDateIndex = Mathf.RoundToInt(Widgets.HorizontalSlider(rectSlider, curDateIndex, 0f, lastIndex, true, labelSlider));
+				num += rectSlider.width;
+			}
+			num += 4f;
+			{
+				Rect rectButton = new Rect(num, 0f, height, height);
+				if (Widgets.ButtonText(rectButton, ">") && curDateIndex < lastIndex) {
+					curDateIndex++;
+				}
+				num += rectButton.width;
+			}
+			if (curDateIndex != currentIndex) {
+				RefreshDrawEntries();
+			}
+
+			Text.Anchor = TextAnchor.UpperLeft;
+			GUI.EndGroup();
+
+			return new Vector2(num, height);
+		}
+
+		private void DrawRecordInfoOnTable(Rect rect) {
+			RecordReportUtility.DrawRecordReport(rect);
+		}
+
+		private void RefreshDrawEntries() {
+			ColonistHistoryData data = CompRecorder.GetRecords(MainTabWindow_ColonistHistory.curPawn).log[MainTabWindow_ColonistHistory.curDateIndex];
+			RecordReportUtility.ResolveDrawEntries(data);
 		}
 
 		private void DoGraphPage(Rect rect) {

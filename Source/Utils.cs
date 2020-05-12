@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
 
@@ -126,7 +123,7 @@ namespace ColonistHistory {
             return false;
         }
 
-        public static string ConvertToDateTimeString(int tick,int tile) {
+        public static string ConvertToDateTimeString(int tick, int tile) {
             Vector2 vector = Find.WorldGrid.LongLatOf(tile);
             string hourString = GenDate.HourInteger((long)tick, vector.x) + "LetterHour".Translate();
             return "ColonistHistoryWorker.DateString".Translate(GenDate.DateReadoutStringAt((long)tick, vector), hourString);
