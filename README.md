@@ -4,6 +4,5 @@
 デバッグアクション「save colonist histories.」でファイル出力できます。  
 
 ## 予定
-- 情報をグラフで確認できる手段を用意する。
-- ファイル出力を手軽にできるようにする。
-- RecordDefごとに記録するか設定できるようにする(TMB_RecordsMisc,TMB_RecordsTime)。
+- RecordDef,SkillDefごとに記録するか設定できるようにする(TMB_RecordsMisc,TMB_RecordsTime)。
+- 出力したXMLファイルからサイト上で情報を確認できるようにする。
