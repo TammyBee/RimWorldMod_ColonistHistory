@@ -18,10 +18,11 @@ namespace ColonistHistory {
             this.recordTick = currentTick;
             this.forceRecord = forceRecord;
             this.records = new ColonistHistoryDataRecords(pawn);
+            this.dateString = Utils.ConvertToDateTimeString(Find.TickManager.TicksAbs, tile);
+        }
 
-            Vector2 vector = Find.WorldGrid.LongLatOf(tile);
-            string hourString = GenDate.HourInteger((long)Find.TickManager.TicksAbs, vector.x) + "LetterHour".Translate();
-            this.dateString = "ColonistHistoryWorker.DateString".Translate(GenDate.DateReadoutStringAt((long)Find.TickManager.TicksAbs, vector), hourString);
+        public ColonistHistoryRecord GetRecord(RecordIdentifier recordID) {
+            return this.records.records.Find(r => r.RecordID.Equals(recordID));
         }
 
         public void ExposeData() {

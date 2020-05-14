@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using Verse;
 
 namespace ColonistHistory {
@@ -15,6 +16,26 @@ namespace ColonistHistory {
 
 		public Type valueType;
 		public Type defType;
+
+		[MustTranslate]
+		public string graphLabelY;
+
+		public bool useFixedScale;
+
+		public Vector2 fixedScale;
+
+		public bool integersOnly;
+
+		public bool onlyPositiveValues = true;
+
+		public string GraphLabelY {
+			get {
+				if (this.graphLabelY == null) {
+					return "Value".TranslateSimple();
+				}
+				return this.graphLabelY;
+			}
+		}
 
 		public ColonistHistoryWorker Worker {
 			get {
