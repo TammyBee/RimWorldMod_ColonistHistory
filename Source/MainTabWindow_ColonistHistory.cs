@@ -42,11 +42,13 @@ namespace ColonistHistory {
 			}, () => MainTabWindow_ColonistHistory.curTab == MainTabWindow_ColonistHistory.TabType.Table));
 			this.tabs.Add(new TabRecord("ColonistHistory.TabGraph".Translate(), delegate () {
 				MainTabWindow_ColonistHistory.curTab = MainTabWindow_ColonistHistory.TabType.Graph;
+				RefreshGraph();
 			}, () => MainTabWindow_ColonistHistory.curTab == MainTabWindow_ColonistHistory.TabType.Graph));
 
 			MainTabWindow_ColonistHistory.curPawn = CompRecorder.Colonists.First();
 			RecordReportUtility.Reset();
 			RefreshDrawEntries();
+			RefreshGraph();
 
 			Pawn pawn = MainTabWindow_ColonistHistory.curPawn;
 			int lastIndex = CompRecorder.GetRecords(pawn).log.Count - 1;
@@ -185,7 +187,7 @@ namespace ColonistHistory {
 		}
 
 		private void DrawRecordInfoOnTable(Rect rect) {
-			RecordReportUtility.DrawRecordReport(rect);
+			RecordReportUtility.Draw(rect);
 		}
 
 		private void RefreshDrawEntries() {
@@ -194,7 +196,11 @@ namespace ColonistHistory {
 		}
 
 		private void DoGraphPage(Rect rect) {
+			RecordGraphUtility.Draw(rect);
+		}
 
+		private void RefreshGraph() {
+			RecordGraphUtility.Reset(CompRecorder);
 		}
 
 		private enum TabType : byte {

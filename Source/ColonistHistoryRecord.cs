@@ -43,6 +43,21 @@ namespace ColonistHistory {
             }
         }
 
+        public float ValueForGraph {
+            get {
+                if (this.IsNumeric && !this.IsList) {
+                    return this.Parent.Worker.GetValueForGraph(this.Value);
+                }
+                return 0f;
+            }
+        }
+
+        public RecordIdentifier RecordID {
+            get {
+                return new RecordIdentifier(this.Parent, this.Def);
+            }
+        }
+
         public ColonistHistoryRecord() {
 
         }

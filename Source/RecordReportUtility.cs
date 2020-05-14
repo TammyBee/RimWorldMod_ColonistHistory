@@ -32,7 +32,7 @@ namespace ColonistHistory {
 			RecordReportUtility.cachedDrawEntries.AddRange(data.records.records.Select(record => new RecordDrawEntry(record)));
 		}
 
-		public static void DrawRecordReport(Rect rect) {
+		public static void Draw(Rect rect) {
 			Rect rect2 = new Rect(rect);
 			Text.Font = GameFont.Small;
 			Rect viewRect = new Rect(0f, 0f, rect2.width - 16f, RecordReportUtility.listHeight);

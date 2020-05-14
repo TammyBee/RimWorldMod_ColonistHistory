@@ -14,6 +14,9 @@ namespace ColonistHistory {
         private int firstTile = -1; 
         private Dictionary<Pawn, ColonistHistoryDataList> colonistHistories = new Dictionary<Pawn, ColonistHistoryDataList>();
 
+        private HashSet<RecordIdentifier> cacheAvailableRecords = null;
+        private int cachedFirstRecordTick = -1;
+
         private List<Pawn> tmpPawns = new List<Pawn>();
         private List<ColonistHistoryDataList> tmpColonistHistories = new List<ColonistHistoryDataList>();
 
@@ -60,6 +63,15 @@ namespace ColonistHistory {
             }
         }
 
+        public int FirstRecordTick {
+            get {
+                if (this.cachedFirstRecordTick == -1) {
+                    this.cachedFirstRecordTick = colonistHistories.Values.Select(v => v.log[0].recordTick).Min();
+                }
+                return this.cachedFirstRecordTick;
+            }
+        }
+
         public static string SaveFilePath {
             get {
                 string fileName = "";
@@ -78,6 +90,25 @@ namespace ColonistHistory {
             get {
                 foreach (Pawn p in this.colonistHistories.Keys.OrderBy(x => x.thingIDNumber)) {
                     yield return p;
+                }
+            }
+        }
+
+        public HashSet<RecordIdentifier> AvailableRecords {
+            get {
+                if (this.cacheAvailableRecords == null) {
+                    ResolveAvailableRecords();
+                }
+                return this.cacheAvailableRecords;
+            }
+        }
+
+        public IEnumerable<RecordIdentifier> NumericRecords {
+            get {
+                foreach (RecordIdentifier recordID in this.AvailableRecords) {
+                    if (recordID.IsNumeric) {
+                        yield return recordID;
+                    }
                 }
             }
         }
@@ -125,6 +156,9 @@ namespace ColonistHistory {
                 this.lastAutoRecordTick = currentTick;
             }
 
+            ResolveAvailableRecords();
+            RecordGraphUtility.CurRecordGroup.ResolveGraph();
+
             return true;
         }
 
@@ -148,6 +182,13 @@ namespace ColonistHistory {
             Scribe_Values.Look(ref this.lastRecordIsManual, "lastRecordIsManual", false);
             Scribe_Values.Look(ref this.firstTile, "firstTile", -1);
             Scribe_Collections.Look(ref this.colonistHistories, "colonistHistories", LookMode.Reference ,LookMode.Deep, ref this.tmpPawns, ref this.tmpColonistHistories);
+        }
+
+        public void ResolveAvailableRecords() {
+            this.cacheAvailableRecords = new HashSet<RecordIdentifier>();
+            foreach (ColonistHistoryDataList dataList in this.colonistHistories.Values) {
+                this.cacheAvailableRecords.AddRange(dataList.AvailableRecords);
+            }
         }
     }
 }

@@ -21,6 +21,10 @@ namespace ColonistHistory {
             this.dateString = Utils.ConvertToDateTimeString(Find.TickManager.TicksAbs, tile);
         }
 
+        public ColonistHistoryRecord GetRecord(RecordIdentifier recordID) {
+            return this.records.records.Find(r => r.RecordID.Equals(recordID));
+        }
+
         public void ExposeData() {
             Scribe_Values.Look(ref this.recordTick, "recordTick");
             Scribe_Values.Look(ref this.dateString, "dateString");

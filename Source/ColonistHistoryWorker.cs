@@ -26,5 +26,9 @@ namespace ColonistHistory {
         public virtual string GetValueAsString(ColonistHistoryRecord record) {
             return record.Value.ToStringSafe();
         }
+
+        public virtual float GetValueForGraph(object value) {
+            return System.Convert.ToSingle(value);
+        }
     }
 }

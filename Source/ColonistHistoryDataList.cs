@@ -10,6 +10,16 @@ namespace ColonistHistory {
         public string pawnName;
         public List<ColonistHistoryData> log;
 
+        public HashSet<RecordIdentifier> AvailableRecords {
+            get {
+                HashSet<RecordIdentifier> records = new HashSet<RecordIdentifier>();
+                foreach (ColonistHistoryData data in log) {
+                    records.AddRange(data.records.records.ConvertAll(r => r.RecordID));
+                }
+                return records;
+            }
+        }
+
         public ColonistHistoryDataList() {
 
         }

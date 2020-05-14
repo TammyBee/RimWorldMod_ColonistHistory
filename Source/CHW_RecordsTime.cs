@@ -27,5 +27,9 @@ namespace ColonistHistory {
             }
             return base.GetValueAsString(record);
         }
+
+        public override float GetValueForGraph(object value) {
+            return base.GetValueForGraph(value) / 2500f;
+        }
     }
 }
