@@ -18,6 +18,8 @@ namespace ColonistHistory {
 
 		private Dictionary<Pawn, List<Vector2>> cachedGraph;
 
+		private static Vector2 scrollPosition = Vector2.zero;
+
 		public RecordGroup(GameComponent_ColonistHistoryRecorder comp, RecordIdentifier recordID) {
             this.comp = comp;
             this.recordID = recordID;
@@ -79,8 +81,21 @@ namespace ColonistHistory {
 			curveDrawerStyle.FixedScale = this.recordID.colonistHistoryDef.fixedScale;
 			curveDrawerStyle.YIntegersOnly = this.recordID.colonistHistoryDef.integersOnly;
 			curveDrawerStyle.OnlyPositiveValues = this.recordID.colonistHistoryDef.onlyPositiveValues;
+			curveDrawerStyle.DrawLegend = false;
 			SimpleCurveDrawer.DrawCurves(graphRect, this.curves, curveDrawerStyle, marks, legendRect);
+			DrawCurvesLegend(legendRect,this.curves);
 			Text.Anchor = TextAnchor.UpperLeft;
+		}
+
+		private void DrawCurvesLegend(Rect rect, List<SimpleCurveDrawInfo> curves) {
+			float newWidth = rect.width - GUI.skin.verticalScrollbar.fixedWidth - 2f;
+			int columnCount = (int)(newWidth / 140f);
+			int rowCount = curves.Count / columnCount + 1;
+			float newHeight = rowCount * 20f;
+			Rect newRect = new Rect(rect.x, rect.y, newWidth, newHeight);
+			Widgets.BeginScrollView(rect, ref scrollPosition, newRect);
+			SimpleCurveDrawer.DrawCurvesLegend(newRect, curves);
+			Widgets.EndScrollView();
 		}
 	}
 }

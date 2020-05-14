@@ -60,8 +60,8 @@ namespace ColonistHistory {
 			rect.yMin += 17f;
 			GUI.BeginGroup(rect);
 			Rect graphRect = new Rect(0f, 0f, rect.width, rect.height - 100f);
-			Rect legendRect = new Rect(0f, graphRect.yMax, rect.width / 2f, 40f);
-			Rect rect2 = new Rect(0f, legendRect.yMax, rect.width, 40f);
+			Rect legendRect = new Rect(468f, graphRect.yMax, rect.width - 468f, 80f);
+			Rect rect2 = new Rect(0f, legendRect.yMin + 40f, rect.width, 40f);
 			if (RecordGraphUtility.CurRecordGroup != null) {
 				RecordGraphUtility.marks.Clear();
 				List<Tale> allTalesListForReading = Find.TaleManager.AllTalesListForReading;
@@ -76,19 +76,19 @@ namespace ColonistHistory {
 			}
 			Text.Font = GameFont.Small;
 			float num = (float)Find.TickManager.TicksGame / 60000f;
-			if (Widgets.ButtonText(new Rect(legendRect.xMin + legendRect.width, legendRect.yMin, 110f, 40f), "Last30Days".Translate(), true, true, true)) {
+			if (Widgets.ButtonText(new Rect(0f, legendRect.yMin, 110f, 40f), "Last30Days".Translate(), true, true, true)) {
 				RecordGraphUtility.graphSection = new FloatRange(Mathf.Max(0f, num - 30f), num);
 				SoundDefOf.Click.PlayOneShotOnCamera(null);
 			}
-			if (Widgets.ButtonText(new Rect(legendRect.xMin + legendRect.width + 110f + 4f, legendRect.yMin, 110f, 40f), "Last100Days".Translate(), true, true, true)) {
+			if (Widgets.ButtonText(new Rect(114f, legendRect.yMin, 110f, 40f), "Last100Days".Translate(), true, true, true)) {
 				RecordGraphUtility.graphSection = new FloatRange(Mathf.Max(0f, num - 100f), num);
 				SoundDefOf.Click.PlayOneShotOnCamera(null);
 			}
-			if (Widgets.ButtonText(new Rect(legendRect.xMin + legendRect.width + 228f, legendRect.yMin, 110f, 40f), "Last300Days".Translate(), true, true, true)) {
+			if (Widgets.ButtonText(new Rect(228f, legendRect.yMin, 110f, 40f), "Last300Days".Translate(), true, true, true)) {
 				RecordGraphUtility.graphSection = new FloatRange(Mathf.Max(0f, num - 300f), num);
 				SoundDefOf.Click.PlayOneShotOnCamera(null);
 			}
-			if (Widgets.ButtonText(new Rect(legendRect.xMin + legendRect.width + 342f, legendRect.yMin, 110f, 40f), "AllDays".Translate(), true, true, true)) {
+			if (Widgets.ButtonText(new Rect(342f, legendRect.yMin, 110f, 40f), "AllDays".Translate(), true, true, true)) {
 				RecordGraphUtility.graphSection = new FloatRange(0f, num);
 				SoundDefOf.Click.PlayOneShotOnCamera(null);
 			}
