@@ -3,6 +3,7 @@
 
 	<!-- ColonistHistoryMod -->
 	<ColonistHistoryWorker.SettingsRecordingIntervalHours>情報を記録する間隔: {0}</ColonistHistoryWorker.SettingsRecordingIntervalHours>
+	<ColonistHistoryWorker.SettingsSaveNullOrEmpty>値がNullや空の時でも保存する.</ColonistHistoryWorker.SettingsSaveNullOrEmpty>
 	<ColonistHistoryWorker.SettingsSaveFolderPath>ファイルを保存するフォルダパス</ColonistHistoryWorker.SettingsSaveFolderPath>
 	<ColonistHistoryWorker.SettingsOutputRecords>保存する項目</ColonistHistoryWorker.SettingsOutputRecords>
 
