@@ -148,7 +148,7 @@ namespace ColonistHistory {
 				}
 				num += rectButton.width;
 			}
-			num += 20f;
+			num += 12f;
 
 			Pawn pawn = MainTabWindow_ColonistHistory.curPawn;
 			int lastIndex = CompRecorder.GetRecords(pawn).log.Count - 1;
@@ -178,6 +178,14 @@ namespace ColonistHistory {
 			}
 			if (curDateIndex != currentIndex) {
 				RefreshDrawEntries();
+			}
+			num += 12f;
+			{
+				Rect rectButton = new Rect(num, 0f, 40f, height);
+				if (Widgets.ButtonText(rectButton, "...")) {
+
+				}
+				num += rectButton.width;
 			}
 
 			Text.Anchor = TextAnchor.UpperLeft;
