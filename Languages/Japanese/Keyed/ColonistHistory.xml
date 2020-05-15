@@ -34,4 +34,7 @@
 	<!-- {0}:LabelCap of Hediff / {1}:Label of BodyPart -->
 	<ColonistHistoryWorker.CHW_Hediffs_Label>{0} ({1})</ColonistHistoryWorker.CHW_Hediffs_Label>
 
+	<!-- ColonistHistoryRecord -->
+	<ColonistHistory.NullValue>null</ColonistHistory.NullValue>
+
 </LanguageData>
