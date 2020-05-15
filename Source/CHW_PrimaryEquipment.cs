@@ -10,6 +10,9 @@ namespace ColonistHistory {
     public class CHW_PrimaryEquipment : ColonistHistoryWorker {
         public override IEnumerable<ColonistHistoryRecord> GetRecords(Pawn p) {
             if (p.equipment?.Primary == null) {
+                if (ColonistHistoryMod.Settings.saveNullOrEmpty) {
+                    yield return new ColonistHistoryRecord(def.LabelCap, null, this.def);
+                }
                 yield break;
             }
             yield return new ColonistHistoryRecord(def.LabelCap, p.equipment.Primary.Label, this.def);

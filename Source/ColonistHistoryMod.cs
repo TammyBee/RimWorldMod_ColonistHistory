@@ -48,6 +48,8 @@ namespace ColonistHistory {
             indexRecordingIntervalHours = (int)listing_Standard.Slider(indexRecordingIntervalHours, 0, RecordingIntervalHoursItems.Count - 1);
             Settings.recordingIntervalHours = RecordingIntervalHoursItems[indexRecordingIntervalHours];
 
+            listing_Standard.CheckboxLabeled("ColonistHistoryWorker.SettingsSaveNullOrEmpty".Translate(), ref settings.saveNullOrEmpty);
+
             listing_Standard.Label("ColonistHistoryWorker.SettingsSaveFolderPath".Translate());
             Settings.saveFolderPath = listing_Standard.TextEntry(Settings.saveFolderPath);
 

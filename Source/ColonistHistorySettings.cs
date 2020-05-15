@@ -10,6 +10,7 @@ namespace ColonistHistory {
         private Dictionary<string, bool> colonistHistoryOutput = null;
         public int recordingIntervalHours = 6;
         public string saveFolderPath = DefaultSaveFolderPath;
+        public bool saveNullOrEmpty = true;
         
         public Dictionary<string, bool> ColonistHistoryOutput {
             get {
@@ -55,6 +56,7 @@ namespace ColonistHistory {
         public override void ExposeData() {
             Scribe_Collections.Look(ref this.colonistHistoryOutput, "colonistHistoryOutput");
             Scribe_Values.Look(ref this.recordingIntervalHours, "recordingIntervalHours");
+            Scribe_Values.Look(ref this.saveNullOrEmpty, "saveNullOrEmpty", true);
             Scribe_Values.Look(ref this.saveFolderPath, "saveFolderPath", DefaultSaveFolderPath);
         }
     }

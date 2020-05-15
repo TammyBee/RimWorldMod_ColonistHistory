@@ -16,6 +16,8 @@ namespace ColonistHistory {
         private Type ValueType { get; set; }
         private Type DefType { get; set; }
 
+        private bool isNull = false;
+
         public bool HasDef {
             get {
                 return Def != null;
@@ -25,6 +27,18 @@ namespace ColonistHistory {
         public bool IsList {
             get {
                 return Values != null;
+            }
+        }
+
+        public bool IsNull {
+            get {
+                return this.isNull;
+            }
+        }
+
+        public bool IsNullOrEmpty {
+            get {
+                return this.Values.NullOrEmpty();
             }
         }
 
@@ -90,6 +104,10 @@ namespace ColonistHistory {
             Parent = parent;
             ValueType = Parent.valueType;
             DefType = Parent.defType;
+            if (Value == null) {
+                Value = "ColonistHistory.NullValue".Translate();
+                this.isNull = true;
+            }
         }
 
         public ColonistHistoryRecord(string label, object value, ColonistHistoryDef parent) {
@@ -100,6 +118,10 @@ namespace ColonistHistory {
             Parent = parent;
             ValueType = Parent.valueType;
             DefType = null;
+            if (Value == null) {
+                Value = "ColonistHistory.NullValue".Translate();
+                this.isNull = true;
+            }
         }
 
         public override string ToString() {
