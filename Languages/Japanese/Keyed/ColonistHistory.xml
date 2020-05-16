@@ -43,4 +43,7 @@
 	<ColonistHistory.HideNullOrEmpty>Nullや空を非表示にする.</ColonistHistory.HideNullOrEmpty>
 	<ColonistHistory.HideUnrecorded>記録していない値を非表示にする.</ColonistHistory.HideUnrecorded>
 
+	<!-- Dialog_NameSaveFile -->
+	<ColonistHistory.Dialog_NameSaveFileDesc>ファイル名を指定してください.</ColonistHistory.Dialog_NameSaveFileDesc>
+
 </LanguageData>

@@ -20,6 +20,12 @@ namespace ColonistHistory {
         private List<Pawn> tmpPawns = new List<Pawn>();
         private List<ColonistHistoryDataList> tmpColonistHistories = new List<ColonistHistoryDataList>();
 
+        public static GameComponent_ColonistHistoryRecorder Instance {
+            get {
+                return Current.Game.GetComponent<GameComponent_ColonistHistoryRecorder>();
+            }
+        }
+
         public int NextRecordTick {
             get {
                 if (this.LastAutoRecordTick != -1) {
@@ -72,7 +78,7 @@ namespace ColonistHistory {
             }
         }
 
-        public static string SaveFilePath {
+        public static string SaveFileName {
             get {
                 string fileName = "";
                 if (Faction.OfPlayer.HasName) {
@@ -81,8 +87,13 @@ namespace ColonistHistory {
                     fileName = SaveGameFilesUtility.UnusedDefaultFileName(Faction.OfPlayer.def.LabelCap);
                 }
                 fileName += "_" + Current.Game.World.info.seedString;
-                fileName += ".xml";
-                return string.Join("/", ColonistHistoryMod.Settings.saveFolderPath, fileName);
+                return fileName;
+            }
+        }
+
+        public static string SaveFilePath {
+            get {
+                return string.Join("/", ColonistHistoryMod.Settings.saveFolderPath, SaveFileName + ".xml");
             }
         }
 
@@ -162,15 +173,19 @@ namespace ColonistHistory {
             return true;
         }
 
-        public void Save() {
+        public void Save(string fileName = null) {
             try {
-                SafeSaver.Save(SaveFilePath, "root", delegate {
+                string filePath = SaveFilePath;
+                if (fileName != null) {
+                    filePath = string.Join("/", ColonistHistoryMod.Settings.saveFolderPath, fileName);
+                }
+                SafeSaver.Save(filePath, "root", delegate {
                     int xmlFormatVersion = ColonistHistoryMod.XmlFormatVersion;
                     Scribe_Values.Look(ref xmlFormatVersion, "xmlFormatVersion");
                     List<ColonistHistoryDataList> list = this.colonistHistories.Values.ToList();
                     Scribe_Collections.Look(ref list, "colonistHistories", LookMode.Deep);
                 });
-                Messages.Message("ColonistHistory.SaveColonistHistoriesFileAs".Translate(SaveFilePath), MessageTypeDefOf.NeutralEvent,false);
+                Messages.Message("ColonistHistory.SaveColonistHistoriesFileAs".Translate(filePath), MessageTypeDefOf.NeutralEvent,false);
             } catch (Exception ex) {
                 Log.Error("Exception while saving world: " + ex.ToString());
             }
