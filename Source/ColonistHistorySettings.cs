@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using HarmonyLib;
+using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -64,7 +65,7 @@ namespace ColonistHistory {
 
         public static string DefaultSaveFolderPath {
             get {
-                MethodInfo FolderUnderSaveData = typeof(GenFilePaths).GetMethod("FolderUnderSaveData", BindingFlags.InvokeMethod | BindingFlags.NonPublic | BindingFlags.Static);
+                MethodInfo FolderUnderSaveData = AccessTools.Method(typeof(GenFilePaths), "FolderUnderSaveData");
                 return (string)FolderUnderSaveData.Invoke(null, new object[] { "ColonistHistory" });
             }
         }
