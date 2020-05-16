@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Verse;
+using Verse.Sound;
 
 namespace ColonistHistory {
     public class ColonistHistoryMod : Mod {
@@ -32,7 +33,6 @@ namespace ColonistHistory {
         }
 
         public override void DoSettingsWindowContents(Rect inRect) {
-            float num = inRect.y;
 
             Text.Font = GameFont.Small;
 
@@ -56,13 +56,46 @@ namespace ColonistHistory {
             listing_Standard.Gap();
 
             listing_Standard.Label("ColonistHistory.SettingsOutputRecords".Translate());
-            foreach(ColonistHistoryDef def in DefDatabase<ColonistHistoryDef>.AllDefsListForReading) {
-                bool value = Settings.CanOutput(def);
-                listing_Standard.CheckboxLabeled(def.LabelCap, ref value, def.description);
-                Settings.ColonistHistoryOutput[def.defName] = value;
-            }
 
             listing_Standard.End();
+
+            Rect rect = new Rect(inRect.x, inRect.y + listing_Standard.CurHeight, listing_Standard.ColumnWidth, inRect.height - listing_Standard.CurHeight);
+            //Log.Message("rect:" + rect);
+            GUI.BeginGroup(rect);
+            float num = 0f;
+            float heightRow = 28f;
+            int indexColonistHistoryDef = 0;
+            int indexReorderDown = -1;
+            foreach (ColonistHistoryDef def in settings.ColonistHistorysOrder) {
+                bool value = Settings.CanOutput(def);
+                Rect rectRow = new Rect(0f, num, rect.width, heightRow);
+                if (indexColonistHistoryDef > 0 && Widgets.ButtonImage(new Rect(0f, num + (heightRow - 24f) / 2f, 24f, 24f), MyTex.ReorderUp, Color.white, true)) {
+                    indexReorderDown = indexColonistHistoryDef - 1;
+                    SoundDefOf.Tick_High.PlayOneShotOnCamera(null);
+                }
+                if (indexColonistHistoryDef < settings.ColonistHistorysOrder.Count - 1 && Widgets.ButtonImage(new Rect(28f, num + (heightRow - 24f) / 2f, 24f, 24f), MyTex.ReorderDown, Color.white, true)) {
+                    indexReorderDown = indexColonistHistoryDef;
+                    SoundDefOf.Tick_High.PlayOneShotOnCamera(null);
+                }
+
+                Rect rectCheckbox = new Rect(56f, num, rectRow.width - 56f, heightRow);
+                //Log.Message("rectCheckbox:" + rectCheckbox);
+                Widgets.CheckboxLabeled(rectCheckbox,def.LabelCap, ref value);
+                if (Mouse.IsOver(rectRow)) {
+                    Widgets.DrawHighlight(rectRow);
+                }
+                TooltipHandler.TipRegion(rectRow, def.description);
+                Settings.ColonistHistoryOutput[def.defName] = value;
+
+                num += rectCheckbox.height;
+                indexColonistHistoryDef++;
+            }
+            if (indexReorderDown != -1) {
+                ColonistHistoryDef def = this.settings.ColonistHistorysOrder[indexReorderDown];
+                this.settings.ColonistHistorysOrder.Remove(def);
+                this.settings.ColonistHistorysOrder.Insert(indexReorderDown + 1, def);
+            }
+            GUI.EndGroup();
 
             Text.Font = GameFont.Medium;
         }

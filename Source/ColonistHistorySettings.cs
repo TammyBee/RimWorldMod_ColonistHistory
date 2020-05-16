@@ -15,6 +15,9 @@ namespace ColonistHistory {
         public bool hideNullOrEmpty = true;
         public bool hideUnrecorded = true;
 
+        private List<ColonistHistoryDef> colonistHistorysOrder = null;
+        private List<string> colonistHistorysOrderDefNames = new List<string>();
+
         public Dictionary<string, bool> ColonistHistoryOutput {
             get {
                 if (this.colonistHistoryOutput == null) {
@@ -26,11 +29,25 @@ namespace ColonistHistory {
 
         public IEnumerable<ColonistHistoryDef> OutputColonistHistorys {
             get {
-                foreach (ColonistHistoryDef def in DefDatabase<ColonistHistoryDef>.AllDefsListForReading) {
+                foreach (ColonistHistoryDef def in ColonistHistorysOrder) {
                     if (CanOutput(def)) {
                         yield return def;
                     }
                 }
+            }
+        }
+
+        public List<ColonistHistoryDef> ColonistHistorysOrder {
+            get {
+                if (this.colonistHistorysOrder == null) {
+                    this.colonistHistorysOrder = this.colonistHistorysOrderDefNames.ConvertAll(defName => DefDatabase<ColonistHistoryDef>.GetNamed(defName));
+                    foreach (ColonistHistoryDef def in DefDatabase<ColonistHistoryDef>.AllDefsListForReading) {
+                        if (!this.colonistHistorysOrder.Contains(def)) {
+                            this.colonistHistorysOrder.Add(def);
+                        }
+                    }
+                }
+                return this.colonistHistorysOrder;
             }
         }
 
@@ -43,7 +60,7 @@ namespace ColonistHistory {
 
         public void InitColonistHistoryOutput() {
             this.colonistHistoryOutput = new Dictionary<string, bool>();
-            foreach (ColonistHistoryDef def in DefDatabase<ColonistHistoryDef>.AllDefsListForReading) {
+            foreach (ColonistHistoryDef def in ColonistHistorysOrder) {
                 this.colonistHistoryOutput[def.defName] = def.defaultOutput;
             }
         }
@@ -63,6 +80,11 @@ namespace ColonistHistory {
 
             Scribe_Values.Look(ref this.hideNullOrEmpty, "hideNullOrEmpty", true);
             Scribe_Values.Look(ref this.hideUnrecorded, "hideUnrecorded", true);
+
+            if (Scribe.mode == LoadSaveMode.Saving) {
+                this.colonistHistorysOrderDefNames = this.colonistHistorysOrder.ConvertAll(def => def.defName);
+            }
+            Scribe_Collections.Look(ref this.colonistHistorysOrderDefNames, "colonistHistorysOrder", LookMode.Value);
         }
     }
 }
