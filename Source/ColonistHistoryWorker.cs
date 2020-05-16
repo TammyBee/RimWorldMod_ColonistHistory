@@ -30,5 +30,9 @@ namespace ColonistHistory {
         public virtual float GetValueForGraph(object value) {
             return System.Convert.ToSingle(value);
         }
+
+        public virtual IEnumerable<RecordIdentifier> GetRecordIDs() {
+            yield return new RecordIdentifier(def, null);
+        }
     }
 }
