@@ -159,6 +159,8 @@ namespace ColonistHistory {
             Scribe_Defs.Look<ColonistHistoryDef>(ref parent, "parent");
             Utils.ScribeObjectValue(ref value, "value", valueType);
             Utils.ScribeObjectsValue(ref values, "values", valueType);
+            Scribe_Values.Look<bool>(ref isNull, "isNull", false);
+            Scribe_Values.Look<bool>(ref isUnrecorded, "isUnrecorded", false);
 
             if (defType != null) {
                 Utils.ScribeDefValue(ref def, "def", defType, true);

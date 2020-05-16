@@ -62,7 +62,7 @@ namespace ColonistHistory {
 					}
 					simpleCurveDrawInfo.curve.SortPoints();
 					if (vectors.Count == 1) {
-						simpleCurveDrawInfo.curve.Add(new CurvePoint(1.66666669E-05f, vectors[0].y), true);
+						//simpleCurveDrawInfo.curve.Add(new CurvePoint(1.66666669E-05f, vectors[0].y), true);
 					}
 					if (ticksGame % 100 == 0) {
 						Log.Message(pawn.Label + "\n" + string.Join("\n",simpleCurveDrawInfo.curve.Points.ConvertAll(p => p.ToString())));
