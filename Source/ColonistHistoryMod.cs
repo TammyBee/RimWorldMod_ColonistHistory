@@ -20,6 +20,8 @@ namespace ColonistHistory {
             }
         }
 
+        private Vector2 scrollPosition = Vector2.zero;
+
         private int indexRecordingIntervalHours = 0;
 
         private static readonly List<int> RecordingIntervalHoursItems = new List<int> {
@@ -59,35 +61,36 @@ namespace ColonistHistory {
 
             listing_Standard.End();
 
-            Rect rect = new Rect(inRect.x, inRect.y + listing_Standard.CurHeight, listing_Standard.ColumnWidth, inRect.height - listing_Standard.CurHeight);
+            float rowHeight = 28f;
+            Rect outRect = new Rect(inRect.x, inRect.y + listing_Standard.CurHeight, listing_Standard.ColumnWidth, inRect.height - listing_Standard.CurHeight);
+            Rect viewRect = new Rect(0f, 0f, inRect.width - 16f, rowHeight * settings.ColonistHistorysOrder.Count);
             //Log.Message("rect:" + rect);
-            GUI.BeginGroup(rect);
+            Widgets.BeginScrollView(outRect, ref this.scrollPosition, viewRect);
             float num = 0f;
-            float heightRow = 28f;
             int indexColonistHistoryDef = 0;
             int indexReorderDown = -1;
             foreach (ColonistHistoryDef def in settings.ColonistHistorysOrder) {
                 bool value = Settings.CanOutput(def);
-                Rect rectRow = new Rect(0f, num, rect.width, heightRow);
-                if (indexColonistHistoryDef > 0 && Widgets.ButtonImage(new Rect(0f, num + (heightRow - 24f) / 2f, 24f, 24f), MyTex.ReorderUp, Color.white, true)) {
+                Rect rectRow = new Rect(0f, num, viewRect.width - 20f, rowHeight);
+                if (indexColonistHistoryDef > 0 && Widgets.ButtonImage(new Rect(0f, num + (rowHeight - 24f) / 2f, 24f, 24f), MyTex.ReorderUp, Color.white, true)) {
                     indexReorderDown = indexColonistHistoryDef - 1;
                     SoundDefOf.Tick_High.PlayOneShotOnCamera(null);
                 }
-                if (indexColonistHistoryDef < settings.ColonistHistorysOrder.Count - 1 && Widgets.ButtonImage(new Rect(28f, num + (heightRow - 24f) / 2f, 24f, 24f), MyTex.ReorderDown, Color.white, true)) {
+                if (indexColonistHistoryDef < settings.ColonistHistorysOrder.Count - 1 && Widgets.ButtonImage(new Rect(28f, num + (rowHeight - 24f) / 2f, 24f, 24f), MyTex.ReorderDown, Color.white, true)) {
                     indexReorderDown = indexColonistHistoryDef;
                     SoundDefOf.Tick_High.PlayOneShotOnCamera(null);
                 }
 
-                Rect rectCheckbox = new Rect(56f, num, rectRow.width - 90f, heightRow);
+                Rect rectCheckbox = new Rect(56f, num, rectRow.width - 90f, rowHeight);
                 //Log.Message("rectCheckbox:" + rectCheckbox);
-                Widgets.CheckboxLabeled(rectCheckbox,def.LabelCap, ref value);
+                Widgets.CheckboxLabeled(rectCheckbox, def.LabelCap, ref value);
                 if (Mouse.IsOver(rectRow)) {
                     Widgets.DrawHighlight(rectRow);
                 }
                 TooltipHandler.TipRegion(rectRow, def.description);
                 Settings.ColonistHistoryOutput[def.defName] = value;
 
-                if (def.RecordIDs.Count() >= 2 && Widgets.ButtonText(new Rect(rectCheckbox.xMax, num, 30f, heightRow),"...")) {
+                if (def.RecordIDs.Count() >= 2 && Widgets.ButtonText(new Rect(rectCheckbox.xMax + 4f, num, 30f, rowHeight),"...")) {
                     Find.WindowStack.Add(new Dialog_ColonistHistoryOutputDetailed(def));
                 }
 
@@ -99,7 +102,7 @@ namespace ColonistHistory {
                 this.settings.ColonistHistorysOrder.Remove(def);
                 this.settings.ColonistHistorysOrder.Insert(indexReorderDown + 1, def);
             }
-            GUI.EndGroup();
+            Widgets.EndScrollView();
 
             Text.Font = GameFont.Medium;
         }
