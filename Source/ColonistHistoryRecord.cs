@@ -17,6 +17,7 @@ namespace ColonistHistory {
         private Type DefType { get; set; }
 
         private bool isNull = false;
+        private bool isUnrecorded = false;
 
         public bool HasDef {
             get {
@@ -72,8 +73,23 @@ namespace ColonistHistory {
             }
         }
 
+        public bool IsUnrecorded {
+            get {
+                return this.isUnrecorded;
+            }
+        }
+
         public ColonistHistoryRecord() {
 
+        }
+
+        public ColonistHistoryRecord(RecordIdentifier recordID) {
+            Def = recordID.def;
+            Label = recordID.Label;
+            Parent = recordID.colonistHistoryDef;
+            Value = "ColonistHistory.UnrecordedValue".Translate();
+            this.isUnrecorded = true;
+            this.isNull = true;
         }
 
         public ColonistHistoryRecord(Def def, string label, List<object> values, ColonistHistoryDef parent) {

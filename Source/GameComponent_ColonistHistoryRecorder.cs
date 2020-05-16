@@ -189,6 +189,7 @@ namespace ColonistHistory {
             foreach (ColonistHistoryDataList dataList in this.colonistHistories.Values) {
                 this.cacheAvailableRecords.AddRange(dataList.AvailableRecords);
             }
+            Log.Message(this.cacheAvailableRecords.ToStringSafeEnumerable());
         }
     }
 }

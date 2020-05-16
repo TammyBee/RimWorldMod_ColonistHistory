@@ -8,7 +8,7 @@ using Verse;
 using Verse.Sound;
 
 namespace ColonistHistory {
-    class MainTabWindow_ColonistHistory : MainTabWindow {
+    public class MainTabWindow_ColonistHistory : MainTabWindow {
 
 		private List<TabRecord> tabs = new List<TabRecord>();
 
@@ -21,6 +21,18 @@ namespace ColonistHistory {
 		private GameComponent_ColonistHistoryRecorder CompRecorder {
 			get {
 				return Current.Game.GetComponent<GameComponent_ColonistHistoryRecorder>();
+			}
+		}
+
+		private ColonistHistoryDataList CurRecords {
+			get {
+				return CompRecorder.GetRecords(MainTabWindow_ColonistHistory.curPawn);
+			}
+		}
+
+		private ColonistHistoryData CurData {
+			get {
+				return CurRecords.log[MainTabWindow_ColonistHistory.curDateIndex];
 			}
 		}
 
@@ -140,7 +152,13 @@ namespace ColonistHistory {
 					foreach (Pawn colonist in CompRecorder.Colonists) {
 						Pawn p = colonist;
 						list.Add(new FloatMenuOption(p.Name.ToStringShort, delegate () {
+							int previousSelectedRecordsTick = this.CurData.recordTick;
 							MainTabWindow_ColonistHistory.curPawn = p;
+							int nextIndex = CurRecords.log.FindIndex(data => data.recordTick == previousSelectedRecordsTick);
+							if (nextIndex == -1) {
+								nextIndex = 0;
+							}
+							MainTabWindow_ColonistHistory.curDateIndex = nextIndex;
 							RefreshDrawEntries();
 						}, MenuOptionPriority.Default, null, null, 0f, null, null));
 					}
@@ -183,7 +201,7 @@ namespace ColonistHistory {
 			{
 				Rect rectButton = new Rect(num, 0f, 40f, height);
 				if (Widgets.ButtonText(rectButton, "...")) {
-					Find.WindowStack.Add(new Dialog_RecordTableOption());
+					Find.WindowStack.Add(new Dialog_RecordTableOption(this));
 				}
 				num += rectButton.width;
 			}
@@ -198,9 +216,8 @@ namespace ColonistHistory {
 			RecordReportUtility.Draw(rect);
 		}
 
-		private void RefreshDrawEntries() {
-			ColonistHistoryData data = CompRecorder.GetRecords(MainTabWindow_ColonistHistory.curPawn).log[MainTabWindow_ColonistHistory.curDateIndex];
-			RecordReportUtility.ResolveDrawEntries(data);
+		public void RefreshDrawEntries() {
+			RecordReportUtility.ResolveDrawEntries(this.CurData);
 		}
 
 		private void DoGraphPage(Rect rect) {

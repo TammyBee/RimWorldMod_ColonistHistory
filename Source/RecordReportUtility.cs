@@ -20,6 +20,12 @@ namespace ColonistHistory {
 
 		private static List<RecordDrawEntry> cachedDrawEntries = new List<RecordDrawEntry>();
 
+		private static GameComponent_ColonistHistoryRecorder CompRecorder {
+			get {
+				return Current.Game.GetComponent<GameComponent_ColonistHistoryRecorder>();
+			}
+		}
+
 		public static void Reset() {
 			RecordReportUtility.scrollPosition = default(Vector2);
 			RecordReportUtility.selectedEntry = null;
@@ -29,7 +35,15 @@ namespace ColonistHistory {
 
 		public static void ResolveDrawEntries(ColonistHistoryData data) {
 			RecordReportUtility.cachedDrawEntries.Clear();
-			RecordReportUtility.cachedDrawEntries.AddRange(data.records.records.Select(record => new RecordDrawEntry(record)));
+			if (ColonistHistoryMod.Settings.hideUnrecorded) {
+				RecordReportUtility.cachedDrawEntries.AddRange(data.records.records.Select(record => new RecordDrawEntry(record)));
+			} else {
+				CompRecorder.ResolveAvailableRecords();
+				foreach (RecordIdentifier recordID in CompRecorder.AvailableRecords) {
+					ColonistHistoryRecord record = data.GetRecord(recordID, true);
+					RecordReportUtility.cachedDrawEntries.Add(new RecordDrawEntry(record));
+				}
+			}
 		}
 
 		public static void Draw(Rect rect) {

@@ -36,9 +36,11 @@
 
 	<!-- ColonistHistoryRecord -->
 	<ColonistHistory.NullValue>null</ColonistHistory.NullValue>
+	<ColonistHistory.UnrecordedValue>未記録</ColonistHistory.UnrecordedValue>
 
 	<!-- Dialog_RecordTableOption -->
 	<ColonistHistory.Dialog_RecordTableOptionTitle>表の設定</ColonistHistory.Dialog_RecordTableOptionTitle>
 	<ColonistHistory.HideNullOrEmpty>Nullや空を非表示にする.</ColonistHistory.HideNullOrEmpty>
+	<ColonistHistory.HideUnrecorded>記録していない値を非表示にする.</ColonistHistory.HideUnrecorded>
 
 </LanguageData>

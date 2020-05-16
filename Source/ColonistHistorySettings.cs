@@ -13,7 +13,8 @@ namespace ColonistHistory {
         public bool saveNullOrEmpty = true;
 
         public bool hideNullOrEmpty = true;
-        
+        public bool hideUnrecorded = true;
+
         public Dictionary<string, bool> ColonistHistoryOutput {
             get {
                 if (this.colonistHistoryOutput == null) {
@@ -61,6 +62,7 @@ namespace ColonistHistory {
             Scribe_Values.Look(ref this.saveNullOrEmpty, "saveNullOrEmpty", true);
 
             Scribe_Values.Look(ref this.hideNullOrEmpty, "hideNullOrEmpty", true);
+            Scribe_Values.Look(ref this.hideUnrecorded, "hideUnrecorded", true);
         }
     }
 }

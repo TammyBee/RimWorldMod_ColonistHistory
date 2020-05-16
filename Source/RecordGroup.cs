@@ -32,8 +32,7 @@ namespace ColonistHistory {
 				this.cachedGraph[pawn] = new List<Vector2>();
 				ColonistHistoryDataList dataList = this.comp.GetRecords(pawn);
 				foreach (ColonistHistoryData data in dataList.log) {
-					ColonistHistoryRecord record = data.GetRecord(recordID);
-					Log.Message(record.Parent.ToStringSafe() + "/" + record.Value + "/" + record.Parent.valueType);
+					ColonistHistoryRecord record = data.GetRecord(recordID,false);
 					float x = GenDate.TickAbsToGame(data.recordTick);
 					float y = record.ValueForGraph;
 					this.cachedGraph[pawn].Add(new Vector2(x,y));

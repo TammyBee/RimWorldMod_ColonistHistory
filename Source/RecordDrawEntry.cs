@@ -31,10 +31,13 @@ namespace ColonistHistory {
 
 		public bool CanRender {
 			get {
-				if (!ColonistHistoryMod.Settings.hideNullOrEmpty) {
-					return true;
+				if (ColonistHistoryMod.Settings.hideNullOrEmpty) {
+					return !this.data.IsNull && !this.data.IsNullOrEmpty;
 				}
-				return !this.data.IsNull && !this.data.IsNullOrEmpty;
+				if (ColonistHistoryMod.Settings.hideUnrecorded) {
+					return !this.data.IsUnrecorded || !this.data.IsNull || !this.data.IsNullOrEmpty;
+				}
+				return true;
 			}
 		}
 
