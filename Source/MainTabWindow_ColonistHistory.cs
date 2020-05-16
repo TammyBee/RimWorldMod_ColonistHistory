@@ -183,7 +183,7 @@ namespace ColonistHistory {
 			{
 				Rect rectButton = new Rect(num, 0f, 40f, height);
 				if (Widgets.ButtonText(rectButton, "...")) {
-
+					Find.WindowStack.Add(new Dialog_RecordTableOption());
 				}
 				num += rectButton.width;
 			}
