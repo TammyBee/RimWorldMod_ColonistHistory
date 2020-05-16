@@ -98,7 +98,7 @@ namespace ColonistHistory {
 				CompRecorder.Record(true);
 			}, null));
 			list.Add(new ListableOption("ColonistHistory.OutputRecordButton".Translate(), delegate {
-				CompRecorder.Save();
+				Find.WindowStack.Add(new Dialog_NameSaveFile(GameComponent_ColonistHistoryRecorder.SaveFileName));
 			}, null));
 
 			Rect rectButtonList = new Rect(0f, 0f, 170f, rect.height);
