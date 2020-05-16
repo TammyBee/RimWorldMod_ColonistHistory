@@ -46,5 +46,9 @@ namespace ColonistHistory {
         public bool IsSame(RecordIdentifier other) {
             return this.colonistHistoryDef == other.colonistHistoryDef && this.def == other.def;
         }
+
+        public override string ToString() {
+            return "(" + colonistHistoryDef.ToStringSafe() + "/" + def.ToStringSafe() + ")";
+        }
     }
 }

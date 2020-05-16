@@ -17,6 +17,7 @@ namespace ColonistHistory {
         private Type DefType { get; set; }
 
         private bool isNull = false;
+        private bool isUnrecorded = false;
 
         public bool HasDef {
             get {
@@ -32,13 +33,13 @@ namespace ColonistHistory {
 
         public bool IsNull {
             get {
-                return this.isNull;
+                return !this.IsList && this.isNull;
             }
         }
 
         public bool IsNullOrEmpty {
             get {
-                return this.Values.NullOrEmpty();
+                return this.IsList && this.Values.NullOrEmpty();
             }
         }
 
@@ -72,8 +73,23 @@ namespace ColonistHistory {
             }
         }
 
+        public bool IsUnrecorded {
+            get {
+                return this.isUnrecorded;
+            }
+        }
+
         public ColonistHistoryRecord() {
 
+        }
+
+        public ColonistHistoryRecord(RecordIdentifier recordID) {
+            Def = recordID.def;
+            Label = recordID.Label;
+            Parent = recordID.colonistHistoryDef;
+            Value = "ColonistHistory.UnrecordedValue".Translate();
+            this.isUnrecorded = true;
+            this.isNull = true;
         }
 
         public ColonistHistoryRecord(Def def, string label, List<object> values, ColonistHistoryDef parent) {
@@ -143,6 +159,8 @@ namespace ColonistHistory {
             Scribe_Defs.Look<ColonistHistoryDef>(ref parent, "parent");
             Utils.ScribeObjectValue(ref value, "value", valueType);
             Utils.ScribeObjectsValue(ref values, "values", valueType);
+            Scribe_Values.Look<bool>(ref isNull, "isNull", false);
+            Scribe_Values.Look<bool>(ref isUnrecorded, "isUnrecorded", false);
 
             if (defType != null) {
                 Utils.ScribeDefValue(ref def, "def", defType, true);

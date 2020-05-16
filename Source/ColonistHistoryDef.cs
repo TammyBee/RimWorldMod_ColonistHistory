@@ -17,6 +17,8 @@ namespace ColonistHistory {
 		public Type valueType;
 		public Type defType;
 
+		public bool isValueList = false;
+
 		[MustTranslate]
 		public string graphLabelY;
 

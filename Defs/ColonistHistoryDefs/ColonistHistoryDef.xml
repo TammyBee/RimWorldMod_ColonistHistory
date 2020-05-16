@@ -54,6 +54,7 @@
         <description>Hediffs as string list.</description>
         <workerClass>ColonistHistory.CHW_Hediffs</workerClass>
         <valueType>string</valueType>
+        <isValueList>true</isValueList>
     </ColonistHistory.ColonistHistoryDef>
 
     <ColonistHistory.ColonistHistoryDef>

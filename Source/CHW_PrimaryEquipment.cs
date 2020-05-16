@@ -11,7 +11,8 @@ namespace ColonistHistory {
         public override IEnumerable<ColonistHistoryRecord> GetRecords(Pawn p) {
             if (p.equipment?.Primary == null) {
                 if (ColonistHistoryMod.Settings.saveNullOrEmpty) {
-                    yield return new ColonistHistoryRecord(def.LabelCap, null, this.def);
+                    object obj = null;
+                    yield return new ColonistHistoryRecord(def.LabelCap, obj, this.def);
                 }
                 yield break;
             }

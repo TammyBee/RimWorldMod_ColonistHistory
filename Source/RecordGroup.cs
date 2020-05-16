@@ -32,8 +32,7 @@ namespace ColonistHistory {
 				this.cachedGraph[pawn] = new List<Vector2>();
 				ColonistHistoryDataList dataList = this.comp.GetRecords(pawn);
 				foreach (ColonistHistoryData data in dataList.log) {
-					ColonistHistoryRecord record = data.GetRecord(recordID);
-					Log.Message(record.Parent.ToStringSafe() + "/" + record.Value + "/" + record.Parent.valueType);
+					ColonistHistoryRecord record = data.GetRecord(recordID,false);
 					float x = GenDate.TickAbsToGame(data.recordTick);
 					float y = record.ValueForGraph;
 					this.cachedGraph[pawn].Add(new Vector2(x,y));
@@ -63,7 +62,7 @@ namespace ColonistHistory {
 					}
 					simpleCurveDrawInfo.curve.SortPoints();
 					if (vectors.Count == 1) {
-						simpleCurveDrawInfo.curve.Add(new CurvePoint(1.66666669E-05f, vectors[0].y), true);
+						//simpleCurveDrawInfo.curve.Add(new CurvePoint(1.66666669E-05f, vectors[0].y), true);
 					}
 					if (ticksGame % 100 == 0) {
 						Log.Message(pawn.Label + "\n" + string.Join("\n",simpleCurveDrawInfo.curve.Points.ConvertAll(p => p.ToString())));
