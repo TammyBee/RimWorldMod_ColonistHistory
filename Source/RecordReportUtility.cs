@@ -36,12 +36,22 @@ namespace ColonistHistory {
 		public static void ResolveDrawEntries(ColonistHistoryData data) {
 			RecordReportUtility.cachedDrawEntries.Clear();
 			if (ColonistHistoryMod.Settings.hideUnrecorded) {
-				RecordReportUtility.cachedDrawEntries.AddRange(data.records.records.Select(record => new RecordDrawEntry(record)));
+				foreach (ColonistHistoryDef def in ColonistHistoryMod.Settings.ColonistHistorysOrder) {
+					foreach (ColonistHistoryRecord record in data.records.records) {
+						if (def == record.Parent) {
+							RecordReportUtility.cachedDrawEntries.Add(new RecordDrawEntry(record));
+						}
+					}
+				}
 			} else {
 				CompRecorder.ResolveAvailableRecords();
-				foreach (RecordIdentifier recordID in CompRecorder.AvailableRecords) {
-					ColonistHistoryRecord record = data.GetRecord(recordID, true);
-					RecordReportUtility.cachedDrawEntries.Add(new RecordDrawEntry(record));
+				foreach (ColonistHistoryDef def in ColonistHistoryMod.Settings.ColonistHistorysOrder) {
+					foreach (RecordIdentifier recordID in CompRecorder.AvailableRecords) {
+						if (recordID.colonistHistoryDef == def) {
+							ColonistHistoryRecord record = data.GetRecord(recordID, true);
+							RecordReportUtility.cachedDrawEntries.Add(new RecordDrawEntry(record));
+						}
+					}
 				}
 			}
 		}

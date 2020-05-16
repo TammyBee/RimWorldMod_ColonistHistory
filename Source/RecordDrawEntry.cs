@@ -58,12 +58,7 @@ namespace ColonistHistory {
 				rect3.width = num;
 				Widgets.Label(rect3, this.ValueString);
 				if (this.data.Parent != null && Mouse.IsOver(rect)) {
-					ColonistHistoryDef localColonistHistoryDef = this.data.Parent;
-					string tipString = localColonistHistoryDef.LabelCap + ": " + localColonistHistoryDef.description;
-					if (this.data.HasDef) {
-						tipString += "\n\n" + this.data.Def.LabelCap + ": " + this.data.Def.description;
-					}
-					TooltipHandler.TipRegion(rect, new TipSignal(tipString, this.data.GetHashCode()));
+					TooltipHandler.TipRegion(rect, new TipSignal(this.data.RecordID.Description, this.data.GetHashCode()));
 				}
 				if (Widgets.ButtonInvisible(rect, true)) {
 					clickedCallback();

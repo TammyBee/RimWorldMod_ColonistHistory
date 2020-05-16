@@ -49,6 +49,14 @@ namespace ColonistHistory {
 			}
 		}
 
+		public IEnumerable<RecordIdentifier> RecordIDs {
+			get {
+				foreach (RecordIdentifier id in this.Worker.GetRecordIDs()) {
+					yield return id;
+				}
+			}
+		}
+
 		public override IEnumerable<string> ConfigErrors() {
 			foreach (string text in base.ConfigErrors()) {
 				yield return text;
