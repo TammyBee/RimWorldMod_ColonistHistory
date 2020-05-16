@@ -2,10 +2,10 @@
 <LanguageData>
 
 	<!-- ColonistHistoryMod -->
-	<ColonistHistoryWorker.SettingsRecordingIntervalHours>情報を記録する間隔: {0}</ColonistHistoryWorker.SettingsRecordingIntervalHours>
-	<ColonistHistoryWorker.SettingsSaveNullOrEmpty>値がNullや空の時でも保存する.</ColonistHistoryWorker.SettingsSaveNullOrEmpty>
-	<ColonistHistoryWorker.SettingsSaveFolderPath>ファイルを保存するフォルダパス</ColonistHistoryWorker.SettingsSaveFolderPath>
-	<ColonistHistoryWorker.SettingsOutputRecords>保存する項目</ColonistHistoryWorker.SettingsOutputRecords>
+	<ColonistHistory.SettingsRecordingIntervalHours>情報を記録する間隔: {0}</ColonistHistory.SettingsRecordingIntervalHours>
+	<ColonistHistory.SettingsSaveNullOrEmpty>値がNullや空の時でも保存する.</ColonistHistory.SettingsSaveNullOrEmpty>
+	<ColonistHistory.SettingsSaveFolderPath>ファイルを保存するフォルダパス</ColonistHistory.SettingsSaveFolderPath>
+	<ColonistHistory.SettingsOutputRecords>保存する項目</ColonistHistory.SettingsOutputRecords>
 
 	<!-- MainTabWindow_ColonistHistory -->
 	<ColonistHistory.TabHome>ホーム</ColonistHistory.TabHome>
@@ -21,18 +21,18 @@
 	<ColonistHistory.NextRecordTimeLeft>次の自動記録まで {0}</ColonistHistory.NextRecordTimeLeft>
 
 	<!-- GameComponent_ColonistHistoryRecorder -->
-	<ColonistHistoryWorker.SaveColonistHistoriesFileAs>入植者の記録を次のファイル名で保存しました. "{0}"</ColonistHistoryWorker.SaveColonistHistoriesFileAs>
+	<ColonistHistory.SaveColonistHistoriesFileAs>入植者の記録を次のファイル名で保存しました. "{0}"</ColonistHistory.SaveColonistHistoriesFileAs>
 
 	<!-- ColonistHistoryData -->
-	<ColonistHistoryWorker.DateString>{0} {1}</ColonistHistoryWorker.DateString>
+	<ColonistHistory.DateString>{0} {1}</ColonistHistory.DateString>
 
 	<!-- ColonistHistoryWorker -->
 	<!-- {0}:LabelCap of ColonistHistoryDef / {1}:Label of Record -->
-	<ColonistHistoryWorker.ColonistHistoryRecordLabel>{0}:{1}</ColonistHistoryWorker.ColonistHistoryRecordLabel>
+	<ColonistHistory.ColonistHistoryRecordLabel>{0}:{1}</ColonistHistory.ColonistHistoryRecordLabel>
 
 	<!-- CHW_Health -->
 	<!-- {0}:LabelCap of Hediff / {1}:Label of BodyPart -->
-	<ColonistHistoryWorker.CHW_Hediffs_Label>{0} ({1})</ColonistHistoryWorker.CHW_Hediffs_Label>
+	<ColonistHistory.CHW_Hediffs_Label>{0} ({1})</ColonistHistory.CHW_Hediffs_Label>
 
 	<!-- ColonistHistoryRecord -->
 	<ColonistHistory.NullValue>null</ColonistHistory.NullValue>

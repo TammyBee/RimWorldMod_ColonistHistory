@@ -44,18 +44,18 @@ namespace ColonistHistory {
             if (indexRecordingIntervalHours == -1) {
                 indexRecordingIntervalHours = 0;
             }
-            listing_Standard.Label("ColonistHistoryWorker.SettingsRecordingIntervalHours".Translate(RecordingIntervalHoursItems[indexRecordingIntervalHours].HoursToString()));
+            listing_Standard.Label("ColonistHistory.SettingsRecordingIntervalHours".Translate(RecordingIntervalHoursItems[indexRecordingIntervalHours].HoursToString()));
             indexRecordingIntervalHours = (int)listing_Standard.Slider(indexRecordingIntervalHours, 0, RecordingIntervalHoursItems.Count - 1);
             Settings.recordingIntervalHours = RecordingIntervalHoursItems[indexRecordingIntervalHours];
 
-            listing_Standard.CheckboxLabeled("ColonistHistoryWorker.SettingsSaveNullOrEmpty".Translate(), ref settings.saveNullOrEmpty);
+            listing_Standard.CheckboxLabeled("ColonistHistory.SettingsSaveNullOrEmpty".Translate(), ref settings.saveNullOrEmpty);
 
-            listing_Standard.Label("ColonistHistoryWorker.SettingsSaveFolderPath".Translate());
+            listing_Standard.Label("ColonistHistory.SettingsSaveFolderPath".Translate());
             Settings.saveFolderPath = listing_Standard.TextEntry(Settings.saveFolderPath);
 
             listing_Standard.Gap();
 
-            listing_Standard.Label("ColonistHistoryWorker.SettingsOutputRecords".Translate());
+            listing_Standard.Label("ColonistHistory.SettingsOutputRecords".Translate());
             foreach(ColonistHistoryDef def in DefDatabase<ColonistHistoryDef>.AllDefsListForReading) {
                 bool value = Settings.CanOutput(def);
                 listing_Standard.CheckboxLabeled(def.LabelCap, ref value, def.description);

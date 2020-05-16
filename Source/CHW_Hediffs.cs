@@ -21,7 +21,7 @@ namespace ColonistHistory {
                 foreach (Hediff hediff in grouping) {
                     string label = hediff.LabelCap;
                     if (grouping.Key != null) {
-                        label = "ColonistHistoryWorker.CHW_Hediffs_Label".Translate(hediff.LabelCap, grouping.Key.LabelCap);
+                        label = "ColonistHistory.CHW_Hediffs_Label".Translate(hediff.LabelCap, grouping.Key.LabelCap);
                     }
                     values.Add(label);
                 }

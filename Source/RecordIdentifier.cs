@@ -15,7 +15,7 @@ namespace ColonistHistory {
                 if (def == null) {
                     return colonistHistoryDef.LabelCap;
                 }
-                return "ColonistHistoryWorker.ColonistHistoryRecordLabel".Translate(colonistHistoryDef.LabelCap, def.LabelCap);
+                return "ColonistHistory.ColonistHistoryRecordLabel".Translate(colonistHistoryDef.LabelCap, def.LabelCap);
             }
         }
 

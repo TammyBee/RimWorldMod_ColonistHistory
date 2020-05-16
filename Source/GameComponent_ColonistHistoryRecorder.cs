@@ -170,7 +170,7 @@ namespace ColonistHistory {
                     List<ColonistHistoryDataList> list = this.colonistHistories.Values.ToList();
                     Scribe_Collections.Look(ref list, "colonistHistories", LookMode.Deep);
                 });
-                Messages.Message("ColonistHistoryWorker.SaveColonistHistoriesFileAs".Translate(SaveFilePath), MessageTypeDefOf.NeutralEvent,false);
+                Messages.Message("ColonistHistory.SaveColonistHistoriesFileAs".Translate(SaveFilePath), MessageTypeDefOf.NeutralEvent,false);
             } catch (Exception ex) {
                 Log.Error("Exception while saving world: " + ex.ToString());
             }
@@ -189,7 +189,6 @@ namespace ColonistHistory {
             foreach (ColonistHistoryDataList dataList in this.colonistHistories.Values) {
                 this.cacheAvailableRecords.AddRange(dataList.AvailableRecords);
             }
-            Log.Message(this.cacheAvailableRecords.ToStringSafeEnumerable());
         }
     }
 }

@@ -126,7 +126,7 @@ namespace ColonistHistory {
         public static string ConvertToDateTimeString(int tick, int tile) {
             Vector2 vector = Find.WorldGrid.LongLatOf(tile);
             string hourString = GenDate.HourInteger((long)tick, vector.x) + "LetterHour".Translate();
-            return "ColonistHistoryWorker.DateString".Translate(GenDate.DateReadoutStringAt((long)tick, vector), hourString);
+            return "ColonistHistory.DateString".Translate(GenDate.DateReadoutStringAt((long)tick, vector), hourString);
         }
     }
 }

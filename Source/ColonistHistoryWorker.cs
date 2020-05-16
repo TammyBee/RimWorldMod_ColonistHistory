@@ -12,7 +12,7 @@ namespace ColonistHistory {
         public abstract IEnumerable<ColonistHistoryRecord> GetRecords(Pawn p);
 
         protected string GenerateColonistHistoryRecordLabel(string label) {
-            return "ColonistHistoryWorker.ColonistHistoryRecordLabel".Translate(def.LabelCap,label);
+            return "ColonistHistory.ColonistHistoryRecordLabel".Translate(def.LabelCap,label);
         }
 
         public virtual string GetValuesAsString(ColonistHistoryRecord record) {
