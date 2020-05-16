@@ -32,13 +32,13 @@ namespace ColonistHistory {
 
         public bool IsNull {
             get {
-                return this.isNull;
+                return !this.IsList && this.isNull;
             }
         }
 
         public bool IsNullOrEmpty {
             get {
-                return this.Values.NullOrEmpty();
+                return this.IsList && this.Values.NullOrEmpty();
             }
         }
 

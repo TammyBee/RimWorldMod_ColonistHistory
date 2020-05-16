@@ -29,6 +29,15 @@ namespace ColonistHistory {
 			}
 		}
 
+		public bool CanRender {
+			get {
+				if (!ColonistHistoryMod.Settings.hideNullOrEmpty) {
+					return true;
+				}
+				return !this.data.IsNull && !this.data.IsNullOrEmpty;
+			}
+		}
+
 		public float Draw(float x, float y, float width, bool selected, Action clickedCallback, Action mousedOverCallback, Vector2 scrollPosition, Rect scrollOutRect) {
 			float num = width * 0.45f;
 			Rect rect = new Rect(8f, y, width, Text.CalcHeight(this.ValueString, num));

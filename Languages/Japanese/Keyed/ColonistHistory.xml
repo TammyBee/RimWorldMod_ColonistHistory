@@ -39,6 +39,6 @@
 
 	<!-- Dialog_RecordTableOption -->
 	<ColonistHistory.Dialog_RecordTableOptionTitle>表の設定</ColonistHistory.Dialog_RecordTableOptionTitle>
-	<ColonistHistory.HideNullOrEmpty>Nullや空も表示する.</ColonistHistory.HideNullOrEmpty>
+	<ColonistHistory.HideNullOrEmpty>Nullや空を非表示にする.</ColonistHistory.HideNullOrEmpty>
 
 </LanguageData>

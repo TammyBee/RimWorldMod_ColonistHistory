@@ -42,15 +42,17 @@ namespace ColonistHistory {
 			RecordReportUtility.mousedOverEntry = null;
 			for (int i = 0; i < RecordReportUtility.cachedDrawEntries.Count; i++) {
 				RecordDrawEntry ent = RecordReportUtility.cachedDrawEntries[i];
-				if (ent.data.Parent.LabelCap != b) {
-					Widgets.ListSeparator(ref num, viewRect.width, ent.data.Parent.LabelCap);
-					b = ent.data.Parent.LabelCap;
+				if (ent.CanRender) {
+					if (ent.data.Parent.LabelCap != b) {
+						Widgets.ListSeparator(ref num, viewRect.width, ent.data.Parent.LabelCap);
+						b = ent.data.Parent.LabelCap;
+					}
+					num += ent.Draw(8f, num, viewRect.width - 8f, RecordReportUtility.selectedEntry == ent, delegate {
+						RecordReportUtility.SelectEntry(ent, true);
+					}, delegate {
+						RecordReportUtility.mousedOverEntry = ent;
+					}, RecordReportUtility.scrollPosition, rect2);
 				}
-				num += ent.Draw(8f, num, viewRect.width - 8f, RecordReportUtility.selectedEntry == ent, delegate {
-					RecordReportUtility.SelectEntry(ent, true);
-				}, delegate {
-					RecordReportUtility.mousedOverEntry = ent;
-				}, RecordReportUtility.scrollPosition, rect2);
 			}
 			RecordReportUtility.listHeight = num + 100f;
 			Widgets.EndScrollView();
