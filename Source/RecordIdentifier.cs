@@ -10,12 +10,32 @@ namespace ColonistHistory {
         public ColonistHistoryDef colonistHistoryDef;
         public Def def;
 
+        public string ID {
+            get {
+                string id = this.colonistHistoryDef.defName;
+                if (this.def != null) {
+                    id += "/" + this.def.defName;
+                }
+                return id;
+            }
+        }
+
         public string Label {
             get {
                 if (def == null) {
                     return colonistHistoryDef.LabelCap;
                 }
                 return "ColonistHistory.ColonistHistoryRecordLabel".Translate(colonistHistoryDef.LabelCap, def.LabelCap);
+            }
+        }
+
+        public string Description {
+            get {
+                string description = this.colonistHistoryDef.LabelCap + ": " + this.colonistHistoryDef.description;
+                if (this.def != null) {
+                    description += "\n\n" + this.def.LabelCap + ": " + this.def.description;
+                }
+                return description;
             }
         }
 

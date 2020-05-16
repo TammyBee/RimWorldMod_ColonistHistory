@@ -35,6 +35,7 @@ namespace ColonistHistory {
             if (previousFlag != ColonistHistoryMod.Settings.hideUnrecorded) {
                 this.parent.RefreshDrawEntries();
             }
+            listing_Standard.End();
         }
     }
 }

@@ -18,6 +18,8 @@ namespace ColonistHistory {
         private List<ColonistHistoryDef> colonistHistorysOrder = null;
         private List<string> colonistHistorysOrderDefNames = new List<string>();
 
+        private Dictionary<string, bool> colonistHistoryOutputDetailed = null;
+
         public Dictionary<string, bool> ColonistHistoryOutput {
             get {
                 if (this.colonistHistoryOutput == null) {
@@ -27,7 +29,16 @@ namespace ColonistHistory {
             }
         }
 
-        public IEnumerable<ColonistHistoryDef> OutputColonistHistorys {
+        public Dictionary<string, bool> ColonistHistoryOutputDetailed {
+            get {
+                if (this.colonistHistoryOutputDetailed == null) {
+                    InitColonistHistoryOutputDetailed();
+                }
+                return this.colonistHistoryOutputDetailed;
+            }
+        }
+
+        public IEnumerable<ColonistHistoryDef> OutputColonistHistories {
             get {
                 foreach (ColonistHistoryDef def in ColonistHistorysOrder) {
                     if (CanOutput(def)) {
@@ -65,6 +76,15 @@ namespace ColonistHistory {
             }
         }
 
+        public void InitColonistHistoryOutputDetailed() {
+            this.colonistHistoryOutputDetailed = new Dictionary<string, bool>();
+            foreach (ColonistHistoryDef def in ColonistHistorysOrder) {
+                foreach (RecordIdentifier recordID in def.RecordIDs) {
+                    this.colonistHistoryOutputDetailed[recordID.ID] = CanOutput(def);
+                }
+            }
+        }
+
         public bool CanOutput(ColonistHistoryDef def) {
             bool result = false;
             if (!this.ColonistHistoryOutput.TryGetValue(def.defName, out result)) {
@@ -73,8 +93,17 @@ namespace ColonistHistory {
             return result;
         }
 
+        public bool CanOutput(RecordIdentifier recordID) {
+            bool result = false;
+            if (!this.ColonistHistoryOutputDetailed.TryGetValue(recordID.ID, out result)) {
+                this.ColonistHistoryOutputDetailed[recordID.ID] = recordID.colonistHistoryDef.defaultOutput;
+            }
+            return result;
+        }
+
         public override void ExposeData() {
             Scribe_Collections.Look(ref this.colonistHistoryOutput, "colonistHistoryOutput");
+            Scribe_Collections.Look(ref this.colonistHistoryOutputDetailed, "colonistHistoryOutputDetailed");
             Scribe_Values.Look(ref this.recordingIntervalHours, "recordingIntervalHours");
             Scribe_Values.Look(ref this.saveNullOrEmpty, "saveNullOrEmpty", true);
 

@@ -15,9 +15,11 @@ namespace ColonistHistory {
 
         public ColonistHistoryDataRecords(Pawn pawn) {
             this.records = new List<ColonistHistoryRecord>();
-            foreach (ColonistHistoryDef colonistHistoryDef in ColonistHistoryMod.Settings.OutputColonistHistorys) {
+            foreach (ColonistHistoryDef colonistHistoryDef in ColonistHistoryMod.Settings.OutputColonistHistories) {
                 foreach(ColonistHistoryRecord record in colonistHistoryDef.Worker.GetRecords(pawn)){
-                    this.records.Add(record);
+                    if (ColonistHistoryMod.Settings.CanOutput(record.RecordID)) {
+                        this.records.Add(record);
+                    }
                 }
             }
         }

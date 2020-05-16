@@ -78,7 +78,7 @@ namespace ColonistHistory {
                     SoundDefOf.Tick_High.PlayOneShotOnCamera(null);
                 }
 
-                Rect rectCheckbox = new Rect(56f, num, rectRow.width - 56f, heightRow);
+                Rect rectCheckbox = new Rect(56f, num, rectRow.width - 90f, heightRow);
                 //Log.Message("rectCheckbox:" + rectCheckbox);
                 Widgets.CheckboxLabeled(rectCheckbox,def.LabelCap, ref value);
                 if (Mouse.IsOver(rectRow)) {
@@ -86,6 +86,10 @@ namespace ColonistHistory {
                 }
                 TooltipHandler.TipRegion(rectRow, def.description);
                 Settings.ColonistHistoryOutput[def.defName] = value;
+
+                if (def.RecordIDs.Count() >= 2 && Widgets.ButtonText(new Rect(rectCheckbox.xMax, num, 30f, heightRow),"...")) {
+                    Find.WindowStack.Add(new Dialog_ColonistHistoryOutputDetailed(def));
+                }
 
                 num += rectCheckbox.height;
                 indexColonistHistoryDef++;
