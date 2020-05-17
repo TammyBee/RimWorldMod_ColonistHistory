@@ -88,6 +88,9 @@ namespace ColonistHistory {
 					renderableCurves.Add(this.curves[i]);
 				}
 			}
+			if (SimpleCurveDrawer_DrawCurveLines_Patch.highLightCurve != null) {
+				renderableCurves.SortBy(c => SimpleCurveDrawer_DrawCurveLines_Patch.IsHighlightedCurve(c));
+			}
 			SimpleCurveDrawer.DrawCurves(graphRect, renderableCurves, curveDrawerStyle, marks, legendRect);
 			DrawCurvesLegend(legendRect,this.curves);
 			Text.Anchor = TextAnchor.UpperLeft;

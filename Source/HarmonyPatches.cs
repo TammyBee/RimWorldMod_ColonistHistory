@@ -44,8 +44,12 @@ namespace ColonistHistory {
     public class SimpleCurveDrawer_DrawCurveLines_Patch {
         public static SimpleCurveDrawInfo highLightCurve = null;
 
+        public static bool IsHighlightedCurve(SimpleCurveDrawInfo curve) {
+            return highLightCurve != null && highLightCurve.label == curve.label && highLightCurve.color == curve.color;
+        }
+
         static void Prefix(SimpleCurveDrawInfo curve) {
-            if (highLightCurve != null && highLightCurve.label == curve.label && highLightCurve.color == curve.color) {
+            if (IsHighlightedCurve(curve)) {
                 Widgets_DrawLine_Patch.fixWidth = ColonistHistoryMod.Settings.highlightedCurveWidth;
             }
         }
