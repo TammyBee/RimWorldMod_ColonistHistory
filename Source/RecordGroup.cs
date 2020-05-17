@@ -30,14 +30,20 @@ namespace ColonistHistory {
 
 		public void ResolveGraph() {
 			this.cachedGraph = new Dictionary<Pawn, List<Vector2>>();
-			foreach (Pawn pawn in this.comp.Colonists) {
-				this.cachedGraph[pawn] = new List<Vector2>();
-				ColonistHistoryDataList dataList = this.comp.GetRecords(pawn);
-				foreach (ColonistHistoryData data in dataList.log) {
-					ColonistHistoryRecord record = data.GetRecord(recordID,false);
-					float x = GenDate.TickAbsToGame(data.recordTick);
-					float y = record.ValueForGraph;
-					this.cachedGraph[pawn].Add(new Vector2(x,y));
+			if (this.comp != null) {
+				foreach (Pawn pawn in this.comp.Colonists) {
+					this.cachedGraph[pawn] = new List<Vector2>();
+					ColonistHistoryDataList dataList = this.comp.GetRecords(pawn);
+					if (dataList != null) {
+						foreach (ColonistHistoryData data in dataList.log) {
+							ColonistHistoryRecord record = data.GetRecord(recordID, false);
+							if (record != null) {
+								float x = GenDate.TickAbsToGame(data.recordTick);
+								float y = record.ValueForGraph;
+								this.cachedGraph[pawn].Add(new Vector2(x, y));
+							}
+						}
+					}
 				}
 			}
 		}
