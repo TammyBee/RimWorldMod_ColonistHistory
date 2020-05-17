@@ -20,6 +20,8 @@ namespace ColonistHistory {
 
 		private static Vector2 scrollPosition = Vector2.zero;
 
+		private static List<int> hidePawnIndexes = new List<int>();
+
 		public RecordGroup(GameComponent_ColonistHistoryRecorder comp, RecordIdentifier recordID) {
             this.comp = comp;
             this.recordID = recordID;
@@ -80,7 +82,13 @@ namespace ColonistHistory {
 			curveDrawerStyle.YIntegersOnly = this.recordID.colonistHistoryDef.integersOnly;
 			curveDrawerStyle.OnlyPositiveValues = this.recordID.colonistHistoryDef.onlyPositiveValues;
 			curveDrawerStyle.DrawLegend = false;
-			SimpleCurveDrawer.DrawCurves(graphRect, this.curves, curveDrawerStyle, marks, legendRect);
+			List<SimpleCurveDrawInfo> renderableCurves = new List<SimpleCurveDrawInfo>();
+			for (int i = 0;i < this.curves.Count;i++) {
+				if (!hidePawnIndexes.Contains(i)) {
+					renderableCurves.Add(this.curves[i]);
+				}
+			}
+			SimpleCurveDrawer.DrawCurves(graphRect, renderableCurves, curveDrawerStyle, marks, legendRect);
 			DrawCurvesLegend(legendRect,this.curves);
 			Text.Anchor = TextAnchor.UpperLeft;
 		}
@@ -142,16 +150,36 @@ namespace ColonistHistory {
 			float num2 = 0f;
 			int num3 = (int)(rect.width / 140f);
 			int num4 = 0;
+			int i = 0;
 			foreach (SimpleCurveDrawInfo simpleCurveDrawInfo in curves) {
+				bool isHidden = hidePawnIndexes.Contains(i);
 				GUI.color = simpleCurveDrawInfo.color;
-				GUI.DrawTexture(new Rect(num, num2 + 2f, 15f, 15f), BaseContent.WhiteTex);
+				if (isHidden) {
+					GUI.color *= Color.grey;
+				}
+				Rect rectColor = new Rect(num, num2 + 2f, 15f, 15f);
+				GUI.DrawTexture(rectColor, BaseContent.WhiteTex);
 				GUI.color = Color.white;
 				num += 20f;
 				if (simpleCurveDrawInfo.label != null) {
 					Rect rectLabel = new Rect(num, num2, 140f, 20f);
+					if (isHidden) {
+						GUI.color = Color.grey;
+					}
 					Widgets.Label(rectLabel, simpleCurveDrawInfo.label);
-					if (!focusedCurves.NullOrEmpty() && focusedCurves.Exists(c => simpleCurveDrawInfo.label == c.label && simpleCurveDrawInfo.color == c.color)) {
+					if (isHidden) {
+						GUI.color = Color.white;
+					}
+					if (!isHidden && !focusedCurves.NullOrEmpty() && focusedCurves.Exists(c => simpleCurveDrawInfo.label == c.label && simpleCurveDrawInfo.color == c.color)) {
 						Widgets.DrawHighlight(rectLabel);
+					}
+
+					if (Widgets.ButtonInvisible(rectLabel) || Widgets.ButtonInvisible(rectColor)) {
+						if (isHidden) {
+							hidePawnIndexes.Remove(i);
+						} else {
+							hidePawnIndexes.Add(i);
+						}
 					}
 				}
 				num4++;
@@ -162,6 +190,7 @@ namespace ColonistHistory {
 				} else {
 					num += 140f;
 				}
+				i++;
 			}
 			GUI.EndGroup();
 			GUI.color = Color.white;
