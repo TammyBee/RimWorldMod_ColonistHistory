@@ -13,6 +13,8 @@ namespace ColonistHistory {
         public string saveFolderPath = DefaultSaveFolderPath;
         public bool saveNullOrEmpty = true;
 
+        public float highlightedCurveWidth = 2f;
+
         public bool hideNullOrEmpty = true;
         public bool hideUnrecorded = true;
 
@@ -107,6 +109,8 @@ namespace ColonistHistory {
             Scribe_Collections.Look(ref this.colonistHistoryOutputDetailed, "colonistHistoryOutputDetailed");
             Scribe_Values.Look(ref this.recordingIntervalHours, "recordingIntervalHours");
             Scribe_Values.Look(ref this.saveNullOrEmpty, "saveNullOrEmpty", true);
+
+            Scribe_Values.Look(ref this.highlightedCurveWidth, "highlightedCurveWidth", 2f);
 
             Scribe_Values.Look(ref this.hideNullOrEmpty, "hideNullOrEmpty", true);
             Scribe_Values.Look(ref this.hideUnrecorded, "hideUnrecorded", true);

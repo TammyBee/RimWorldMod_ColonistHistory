@@ -61,7 +61,7 @@ namespace ColonistHistory {
 			GUI.BeginGroup(rect);
 			Rect graphRect = new Rect(0f, 0f, rect.width, rect.height - 100f);
 			Rect legendRect = new Rect(468f, graphRect.yMax, rect.width - 468f, 80f);
-			Rect rect2 = new Rect(0f, legendRect.yMin + 40f, rect.width, 40f);
+			Rect rect2 = new Rect(0f, legendRect.yMin + 44f, rect.width, 40f);
 			if (RecordGraphUtility.CurRecordGroup != null) {
 				RecordGraphUtility.marks.Clear();
 				List<Tale> allTalesListForReading = Find.TaleManager.AllTalesListForReading;
