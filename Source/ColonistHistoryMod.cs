@@ -30,6 +30,8 @@ namespace ColonistHistory {
 
         public ColonistHistorySettings settings;
 
+        private string highlightedCurveWidthBuf;
+
         public ColonistHistoryMod(ModContentPack content) : base(content) {
             this.settings = GetSettings<ColonistHistorySettings>();
         }
@@ -41,6 +43,8 @@ namespace ColonistHistory {
             Listing_Standard listing_Standard = new Listing_Standard();
             listing_Standard.ColumnWidth = inRect.width;
             listing_Standard.Begin(inRect);
+
+            listing_Standard.Label("ColonistHistory.SettingsTitleGeneral".Translate());
 
             indexRecordingIntervalHours = RecordingIntervalHoursItems.IndexOf(Settings.recordingIntervalHours);
             if (indexRecordingIntervalHours == -1) {
@@ -55,9 +59,15 @@ namespace ColonistHistory {
             listing_Standard.Label("ColonistHistory.SettingsSaveFolderPath".Translate());
             Settings.saveFolderPath = listing_Standard.TextEntry(Settings.saveFolderPath);
 
-            listing_Standard.Gap();
+            listing_Standard.GapLine();
 
-            listing_Standard.Label("ColonistHistory.SettingsOutputRecords".Translate());
+            listing_Standard.Label("ColonistHistory.SettingsTitleGraph".Translate());
+
+            listing_Standard.TextFieldNumericLabeled<float>("ColonistHistory.SettingsHighlightedCurveWidth".Translate(), ref settings.highlightedCurveWidth, ref this.highlightedCurveWidthBuf);
+
+            listing_Standard.GapLine();
+
+            listing_Standard.Label("ColonistHistory.SettingsTitleOutputRecords".Translate());
 
             listing_Standard.End();
 

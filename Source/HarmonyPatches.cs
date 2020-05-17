@@ -26,4 +26,32 @@ namespace ColonistHistory {
             SimpleCurveDrawer_DrawCurveMousePoint_Patch.viewRect = viewRect;
         }
     }
+
+    [HarmonyPatch(typeof(Widgets))]
+    [HarmonyPatch("DrawLine")]
+    public class Widgets_DrawLine_Patch {
+        public static float fixWidth = 0f;
+
+        static void Prefix(ref float width) {
+            if (!Mathf.Approximately(fixWidth, 0f)) {
+                width = fixWidth;
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(SimpleCurveDrawer))]
+    [HarmonyPatch("DrawCurveLines")]
+    public class SimpleCurveDrawer_DrawCurveLines_Patch {
+        public static SimpleCurveDrawInfo highLightCurve = null;
+
+        static void Prefix(SimpleCurveDrawInfo curve) {
+            if (highLightCurve != null && highLightCurve.label == curve.label && highLightCurve.color == curve.color) {
+                Widgets_DrawLine_Patch.fixWidth = ColonistHistoryMod.Settings.highlightedCurveWidth;
+            }
+        }
+
+        static void Postfix() {
+            Widgets_DrawLine_Patch.fixWidth = 0f;
+        }
+    }
 }

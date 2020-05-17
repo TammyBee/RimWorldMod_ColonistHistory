@@ -2,11 +2,13 @@
 <LanguageData>
 
 	<!-- ColonistHistoryMod -->
+	<ColonistHistory.SettingsTitleGeneral>全般</ColonistHistory.SettingsTitleGeneral>
 	<ColonistHistory.SettingsRecordingIntervalHours>情報を記録する間隔: {0}</ColonistHistory.SettingsRecordingIntervalHours>
 	<ColonistHistory.SettingsSaveNullOrEmpty>値がNullや空の時でも保存する.</ColonistHistory.SettingsSaveNullOrEmpty>
 	<ColonistHistory.SettingsSaveFolderPath>ファイルを保存するフォルダパス</ColonistHistory.SettingsSaveFolderPath>
-	<ColonistHistory.SettingsOutputRecords>保存する項目</ColonistHistory.SettingsOutputRecords>
-
+	<ColonistHistory.SettingsTitleGraph>ハイライトした曲線の幅</ColonistHistory.SettingsTitleGraph>
+	<ColonistHistory.SettingsHighlightedCurveWidth>ハイライトした曲線の幅</ColonistHistory.SettingsHighlightedCurveWidth>
+	<ColonistHistory.SettingsTitleOutputRecords>保存する項目</ColonistHistory.SettingsTitleOutputRecords>
 	<!-- MainTabWindow_ColonistHistory -->
 	<ColonistHistory.TabHome>ホーム</ColonistHistory.TabHome>
 	<ColonistHistory.TabTable>表</ColonistHistory.TabTable>

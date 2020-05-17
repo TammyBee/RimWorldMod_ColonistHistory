@@ -151,6 +151,8 @@ namespace ColonistHistory {
 			int num3 = (int)(rect.width / 140f);
 			int num4 = 0;
 			int i = 0;
+
+			SimpleCurveDrawer_DrawCurveLines_Patch.highLightCurve = null;
 			foreach (SimpleCurveDrawInfo simpleCurveDrawInfo in curves) {
 				bool isHidden = hidePawnIndexes.Contains(i);
 				GUI.color = simpleCurveDrawInfo.color;
@@ -172,6 +174,9 @@ namespace ColonistHistory {
 					}
 					if (!isHidden && !focusedCurves.NullOrEmpty() && focusedCurves.Exists(c => simpleCurveDrawInfo.label == c.label && simpleCurveDrawInfo.color == c.color)) {
 						Widgets.DrawHighlight(rectLabel);
+					}
+					if (Mouse.IsOver(rectLabel) || Mouse.IsOver(rectColor)) {
+						SimpleCurveDrawer_DrawCurveLines_Patch.highLightCurve = simpleCurveDrawInfo;
 					}
 
 					if (Widgets.ButtonInvisible(rectLabel) || Widgets.ButtonInvisible(rectColor)) {
