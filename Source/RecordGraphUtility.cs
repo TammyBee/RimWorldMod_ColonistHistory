@@ -22,7 +22,7 @@ namespace ColonistHistory {
 
 		public static RecordIdentifier CurRecordID {
 			get {
-				if (!RecordGraphUtility.curRecordID.IsVaild) {
+				if (!RecordGraphUtility.curRecordID.IsVaild && !RecordGraphUtility.comp.NumericRecords.EnumerableNullOrEmpty()) {
 					RecordGraphUtility.curRecordID = RecordGraphUtility.comp.NumericRecords.First();
 				}
 				return RecordGraphUtility.curRecordID;
