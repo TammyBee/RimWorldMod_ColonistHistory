@@ -35,6 +35,9 @@ namespace ColonistHistory {
 
 		public static RecordGroup CurRecordGroup {
 			get {
+				if (RecordGraphUtility.comp == null) {
+					RecordGraphUtility.Reset(Current.Game.GetComponent<GameComponent_ColonistHistoryRecorder>());
+				}
 				if (RecordGraphUtility.curRecordGroup == null) {
 					RecordGraphUtility.CurRecordGroup = new RecordGroup(RecordGraphUtility.comp, RecordGraphUtility.CurRecordID);
 				}
