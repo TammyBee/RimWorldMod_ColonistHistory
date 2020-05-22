@@ -59,6 +59,14 @@ namespace ColonistHistory {
             listing_Standard.Label("ColonistHistory.SettingsSaveFolderPath".Translate());
             Settings.saveFolderPath = listing_Standard.TextEntry(Settings.saveFolderPath);
 
+            listing_Standard.CheckboxLabeled("ColonistHistory.SettingsRecordOtherFactionPawn".Translate(), ref settings.recordOtherFactionPawn);
+
+            bool previousShowOtherFactionPawn = settings.showOtherFactionPawn;
+            listing_Standard.CheckboxLabeled("ColonistHistory.SettingsShowOtherFactionPawn".Translate(), ref settings.showOtherFactionPawn);
+            if (previousShowOtherFactionPawn != settings.showOtherFactionPawn) {
+                RecordGroup.ForceRedraw();
+            }
+
             listing_Standard.GapLine();
 
             listing_Standard.Label("ColonistHistory.SettingsTitleGraph".Translate());

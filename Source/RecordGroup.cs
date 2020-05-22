@@ -22,6 +22,8 @@ namespace ColonistHistory {
 
         private static List<int> hidePawnIndexes = new List<int>();
 
+        private static bool forceRedraw = false;
+
         public RecordGroup(GameComponent_ColonistHistoryRecorder comp, RecordIdentifier recordID) {
             this.comp = comp;
             this.recordID = recordID;
@@ -51,12 +53,12 @@ namespace ColonistHistory {
 
         public void DrawGraph(Rect graphRect, Rect legendRect, FloatRange section, List<CurveMark> marks) {
             int ticksGame = Find.TickManager.TicksGame;
-            if (ticksGame != this.cachedGraphTickCount) {
+            if (ticksGame != this.cachedGraphTickCount || RecordGroup.forceRedraw) {
                 this.cachedGraphTickCount = ticksGame;
                 this.curves.Clear();
                 int i = 0;
-                int numOfColonist = this.comp.Colonists.Count();
-                foreach (Pawn pawn in this.comp.Colonists) {
+                int numOfColonist = this.comp.Colonists.Where(p => ColonistHistoryMod.Settings.showOtherFactionPawn || !p.ExistExtraNoPlayerFactions()).Count();
+                foreach (Pawn pawn in this.comp.Colonists.Where(p => ColonistHistoryMod.Settings.showOtherFactionPawn || !p.ExistExtraNoPlayerFactions())) {
                     List<Vector2> vectors = this.cachedGraph[pawn];
 
                     SimpleCurveDrawInfo simpleCurveDrawInfo = new SimpleCurveDrawInfo();
@@ -78,6 +80,8 @@ namespace ColonistHistory {
                     this.curves.Add(simpleCurveDrawInfo);
                     i++;
                 }
+
+                RecordGroup.forceRedraw = false;
             }
             if (Mathf.Approximately(section.min, section.max)) {
                 section.max += 1.66666669E-05f;
@@ -210,6 +214,10 @@ namespace ColonistHistory {
             GUI.EndGroup();
             GUI.color = Color.white;
             Text.WordWrap = true;
+        }
+
+        public static void ForceRedraw() {
+            RecordGroup.forceRedraw = true;
         }
     }
 }

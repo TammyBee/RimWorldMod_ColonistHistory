@@ -22,6 +22,7 @@ namespace ColonistHistory {
             if (TryScribeObjectValueInternal<string>(ref value, label, type)) {
                 return;
             }
+            if (type == typeof(string)) Log.Message(type + "/" + typeof(string) + "/" + (type == typeof(string)));
             Log.Error("[ScribeObjectValue] cannot scribe value.\n" + string.Join("/ ", label, value.ToStringSafe(), type, Scribe.mode));
         }
 
@@ -127,6 +128,20 @@ namespace ColonistHistory {
             Vector2 vector = Find.WorldGrid.LongLatOf(tile);
             string hourString = GenDate.HourInteger((long)tick, vector.x) + "LetterHour".Translate();
             return "ColonistHistory.DateString".Translate(GenDate.DateReadoutStringAt((long)tick, vector), hourString);
+        }
+
+        public static bool ExistExtraNoPlayerFactions(this Pawn p) {
+            List<Quest> questsListForReading = Find.QuestManager.QuestsListForReading;
+            for (int i = 0; i < questsListForReading.Count; i++) {
+                List<QuestPart> partsListForReading = questsListForReading[i].PartsListForReading;
+                for (int j = 0; j < partsListForReading.Count; j++) {
+                    QuestPart_ExtraFaction questPart_ExtraFaction = partsListForReading[j] as QuestPart_ExtraFaction;
+                    if (questPart_ExtraFaction?.extraFaction?.faction != null && questPart_ExtraFaction.affectedPawns.Contains(p) && !questPart_ExtraFaction.extraFaction.faction.IsPlayer ) {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }

@@ -143,7 +143,7 @@ namespace ColonistHistory {
 
         public bool Record(bool manualRecord = false) {
             int currentTick = Current.Game.tickManager.TicksAbs;
-            List<Pawn> colonists = Find.ColonistBar.GetColonistsInOrder();
+            List<Pawn> colonists = Find.ColonistBar.GetColonistsInOrder().Where(p => ColonistHistoryMod.Settings.recordOtherFactionPawn || !p.ExistExtraNoPlayerFactions()).ToList();
             if (colonists.NullOrEmpty()) {
                 return false;
             }

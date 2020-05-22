@@ -13,6 +13,9 @@ namespace ColonistHistory {
         public string saveFolderPath = DefaultSaveFolderPath;
         public bool saveNullOrEmpty = true;
 
+        public bool recordOtherFactionPawn = true;
+        public bool showOtherFactionPawn = true;
+
         public float highlightedCurveWidth = 2f;
 
         public bool hideNullOrEmpty = true;
@@ -109,6 +112,9 @@ namespace ColonistHistory {
             Scribe_Collections.Look(ref this.colonistHistoryOutputDetailed, "colonistHistoryOutputDetailed");
             Scribe_Values.Look(ref this.recordingIntervalHours, "recordingIntervalHours");
             Scribe_Values.Look(ref this.saveNullOrEmpty, "saveNullOrEmpty", true);
+
+            Scribe_Values.Look(ref this.recordOtherFactionPawn, "recordOtherFactionPawn", true);
+            Scribe_Values.Look(ref this.showOtherFactionPawn, "showOtherFactionPawn", true);
 
             Scribe_Values.Look(ref this.highlightedCurveWidth, "highlightedCurveWidth", 2f);
 
