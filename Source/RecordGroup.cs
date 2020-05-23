@@ -39,12 +39,17 @@ namespace ColonistHistory {
                     if (dataList != null) {
                         foreach (ColonistHistoryData data in dataList.log) {
                             ColonistHistoryRecord record = data.GetRecord(recordID, false);
-                            float x = GenDate.TickAbsToGame(data.recordTick);
-                            float y = 0f;
-                            if (record != null) {
-                                y = record.ValueForGraph;
+                            if ((record != null && !record.IsUnrecorded) || ColonistHistoryMod.Settings.treatingUnrecordedAsZero) {
+                                float x = GenDate.TickAbsToGame(data.recordTick);
+                                float y = 0f;
+                                if (record != null) {
+                                    y = record.ValueForGraph;
+                                }
+                                if (this.cachedGraph[pawn].Count == 0 && ColonistHistoryMod.Settings.addZeroBeforeFirst) {
+                                    this.cachedGraph[pawn].Add(new Vector2(x - 0.001f, 0));
+                                }
+                                this.cachedGraph[pawn].Add(new Vector2(x, y));
                             }
-                            this.cachedGraph[pawn].Add(new Vector2(x, y));
                         }
                     }
                 }

@@ -17,6 +17,8 @@ namespace ColonistHistory {
         public bool showOtherFactionPawn = true;
 
         public float highlightedCurveWidth = 2f;
+        public bool treatingUnrecordedAsZero = false;
+        public bool addZeroBeforeFirst = true;
 
         public bool hideNullOrEmpty = true;
         public bool hideUnrecorded = true;
@@ -117,6 +119,8 @@ namespace ColonistHistory {
             Scribe_Values.Look(ref this.showOtherFactionPawn, "showOtherFactionPawn", true);
 
             Scribe_Values.Look(ref this.highlightedCurveWidth, "highlightedCurveWidth", 2f);
+            Scribe_Values.Look(ref this.treatingUnrecordedAsZero, "treatingUnrecordedAsZero", false);
+            Scribe_Values.Look(ref this.addZeroBeforeFirst, "addZeroBeforeFirst", true);
 
             Scribe_Values.Look(ref this.hideNullOrEmpty, "hideNullOrEmpty", true);
             Scribe_Values.Look(ref this.hideUnrecorded, "hideUnrecorded", true);

@@ -12,6 +12,8 @@
 
 	<ColonistHistory.SettingsTitleGraph>グラフ</ColonistHistory.SettingsTitleGraph>
 	<ColonistHistory.SettingsHighlightedCurveWidth>ハイライトした曲線の幅</ColonistHistory.SettingsHighlightedCurveWidth>
+	<ColonistHistory.SettingsTreatingUnrecordedAsZero>記録していない値を0として扱う</ColonistHistory.SettingsTreatingUnrecordedAsZero>
+	<ColonistHistory.SettingsAddZeroBeforeFirst>記録し始めた値の前に0を追加する</ColonistHistory.SettingsAddZeroBeforeFirst>
 
 	<ColonistHistory.SettingsTitleOutputRecords>保存する項目</ColonistHistory.SettingsTitleOutputRecords>
 
