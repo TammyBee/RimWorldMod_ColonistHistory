@@ -59,11 +59,29 @@ namespace ColonistHistory {
             listing_Standard.Label("ColonistHistory.SettingsSaveFolderPath".Translate());
             Settings.saveFolderPath = listing_Standard.TextEntry(Settings.saveFolderPath);
 
+            listing_Standard.CheckboxLabeled("ColonistHistory.SettingsRecordOtherFactionPawn".Translate(), ref settings.recordOtherFactionPawn);
+
+            bool previousShowOtherFactionPawn = settings.showOtherFactionPawn;
+            listing_Standard.CheckboxLabeled("ColonistHistory.SettingsShowOtherFactionPawn".Translate(), ref settings.showOtherFactionPawn);
+            if (previousShowOtherFactionPawn != settings.showOtherFactionPawn) {
+                RecordGroup.ForceRedraw();
+            }
+
             listing_Standard.GapLine();
 
             listing_Standard.Label("ColonistHistory.SettingsTitleGraph".Translate());
 
             listing_Standard.TextFieldNumericLabeled<float>("ColonistHistory.SettingsHighlightedCurveWidth".Translate(), ref settings.highlightedCurveWidth, ref this.highlightedCurveWidthBuf);
+            bool previousTreatingUnrecordedAsZero = settings.treatingUnrecordedAsZero;
+            listing_Standard.CheckboxLabeled("ColonistHistory.SettingsTreatingUnrecordedAsZero".Translate(), ref settings.treatingUnrecordedAsZero);
+            if (previousTreatingUnrecordedAsZero != settings.treatingUnrecordedAsZero) {
+                RecordGroup.ForceRedraw();
+            }
+            bool previousAddZeroBeforeFirst = settings.addZeroBeforeFirst;
+            listing_Standard.CheckboxLabeled("ColonistHistory.SettingsAddZeroBeforeFirst".Translate(), ref settings.addZeroBeforeFirst);
+            if (previousAddZeroBeforeFirst != settings.addZeroBeforeFirst) {
+                RecordGroup.ForceRedraw();
+            }
 
             listing_Standard.GapLine();
 
