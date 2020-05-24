@@ -9,7 +9,7 @@ using Verse;
 namespace ColonistHistory {
     public class ColonistHistorySettings : ModSettings {
         private Dictionary<string, bool> colonistHistoryOutput = null;
-        public int recordingIntervalHours = 6;
+        public int recordingIntervalHours = 24;
         public string saveFolderPath = DefaultSaveFolderPath;
         public bool saveNullOrEmpty = true;
 

@@ -22,8 +22,7 @@ namespace ColonistHistory {
             if (TryScribeObjectValueInternal<string>(ref value, label, type)) {
                 return;
             }
-            if (type == typeof(string)) Log.Message(type + "/" + typeof(string) + "/" + (type == typeof(string)));
-            Log.Error("[ScribeObjectValue] cannot scribe value.\n" + string.Join("/ ", label, value.ToStringSafe(), type, Scribe.mode));
+            Log.Warning("[ScribeObjectValue] cannot scribe value.\n" + string.Join("/ ", label, value.ToStringSafe(), type, Scribe.mode));
         }
 
         private static bool TryScribeObjectValueInternal<T>(ref object value, string label, Type type) {
@@ -64,7 +63,7 @@ namespace ColonistHistory {
             if (TryScribeDefValueInternal<RecordDef>(ref value, labelDefName, labelDefType, type)) {
                 return;
             }
-            Log.Error("[ScribeDefValue] cannot scribe def.\n" + string.Join("/ ", labelDefName, labelDefType, value.ToStringSafe(), type, value.ToStringSafe(), Scribe.mode));
+            Log.Warning("[ScribeDefValue] cannot scribe def.\n" + string.Join("/ ", labelDefName, labelDefType, value.ToStringSafe(), type, value.ToStringSafe(), Scribe.mode));
         }
 
         private static bool TryScribeDefValueInternal<T>(ref Def value, string labelDefName, string labelDefType, Type type) where T : Def {
@@ -95,7 +94,7 @@ namespace ColonistHistory {
             if (TryScribeObjectsValueInternal<string>(ref values, label, type)) {
                 return;
             }
-            Log.Error("[ScribeObjectsValue] cannot scribe values.\n" + string.Join("/ ", label, values.ToStringSafeEnumerable(), type, Scribe.mode));
+            Log.Warning("[ScribeObjectsValue] cannot scribe values.\n" + string.Join("/ ", label, values.ToStringSafeEnumerable(), type, Scribe.mode));
         }
 
         private static bool TryScribeObjectsValueInternal<T>(ref List<object> values, string label, Type type) {
