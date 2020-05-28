@@ -12,6 +12,7 @@ namespace ColonistHistory {
         public int recordingIntervalHours = 24;
         public string saveFolderPath = DefaultSaveFolderPath;
         public bool saveNullOrEmpty = true;
+        public bool lightWeightSaveMode = false;
 
         public bool recordOtherFactionPawn = true;
         public bool showOtherFactionPawn = true;
@@ -114,6 +115,7 @@ namespace ColonistHistory {
             Scribe_Collections.Look(ref this.colonistHistoryOutputDetailed, "colonistHistoryOutputDetailed");
             Scribe_Values.Look(ref this.recordingIntervalHours, "recordingIntervalHours");
             Scribe_Values.Look(ref this.saveNullOrEmpty, "saveNullOrEmpty", true);
+            Scribe_Values.Look(ref this.lightWeightSaveMode, "lightWeightSaveMode", false);
 
             Scribe_Values.Look(ref this.recordOtherFactionPawn, "recordOtherFactionPawn", true);
             Scribe_Values.Look(ref this.showOtherFactionPawn, "showOtherFactionPawn", true);

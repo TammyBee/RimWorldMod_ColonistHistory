@@ -10,6 +10,9 @@
 	<ColonistHistory.SettingsRecordOtherFactionPawn>他派閥の入植者も記録する.</ColonistHistory.SettingsRecordOtherFactionPawn>
 	<ColonistHistory.SettingsShowOtherFactionPawn>他派閥の入植者も表示する.</ColonistHistory.SettingsShowOtherFactionPawn>
 
+	<ColonistHistory.SettingsLightWeightSaveMode>軽量セーブモード(実験的)</ColonistHistory.SettingsLightWeightSaveMode>
+	<ColonistHistory.SettingsLightWeightSaveModeDesc>変更があった場合の差分のみを保存することでセーブデータの容量を減らします。</ColonistHistory.SettingsLightWeightSaveModeDesc>
+
 	<ColonistHistory.SettingsTitleGraph>グラフ</ColonistHistory.SettingsTitleGraph>
 	<ColonistHistory.SettingsHighlightedCurveWidth>ハイライトした曲線の幅</ColonistHistory.SettingsHighlightedCurveWidth>
 	<ColonistHistory.SettingsTreatingUnrecordedAsZero>記録していない値を0として扱う</ColonistHistory.SettingsTreatingUnrecordedAsZero>

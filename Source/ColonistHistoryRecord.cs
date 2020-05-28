@@ -83,11 +83,34 @@ namespace ColonistHistory {
 
         }
 
+        public ColonistHistoryRecord(ColonistHistoryRecord src) {
+            this.Def = src.Def;
+            this.Label = src.Label;
+            this.Parent = src.Parent;
+            if (src.IsList) {
+                this.Values = src.Values;
+            } else {
+                this.Value = src.Value;
+            }
+            this.ValueType = Parent.valueType;
+            this.DefType = Parent.defType;
+            this.isUnrecorded = src.IsUnrecorded;
+            if (Value == null) {
+                Value = "ColonistHistory.NullValue".Translate();
+                this.isNull = true;
+            }
+            if (this.isUnrecorded) {
+                Value = "ColonistHistory.UnrecordedValue".Translate();
+            }
+        }
+
         public ColonistHistoryRecord(RecordIdentifier recordID) {
             Def = recordID.def;
             Label = recordID.Label;
             Parent = recordID.colonistHistoryDef;
             Value = "ColonistHistory.UnrecordedValue".Translate();
+            ValueType = Parent.valueType;
+            DefType = Parent.defType;
             this.isUnrecorded = true;
             this.isNull = true;
         }
@@ -137,6 +160,58 @@ namespace ColonistHistory {
             if (Value == null) {
                 Value = "ColonistHistory.NullValue".Translate();
                 this.isNull = true;
+            }
+        }
+
+        public bool IsEqualValue(ColonistHistoryRecord other) {
+            if (!this.RecordID.IsSame(other.RecordID)) {
+                return false;
+            }
+            if (!this.IsList) {
+                if ((this.Value != null) != (other.Value != null)) {
+                    return false;
+                }else if ((this.Value == null) && (other.Value == null)) {
+                    return true;
+                }
+                return this.Value.Equals(other.Value);
+            } else {
+                if (this.Values.NullOrEmpty() != other.Values.NullOrEmpty()) {
+                    return false;
+                }else if (this.Values.NullOrEmpty() && other.Values.NullOrEmpty()) {
+                    return true;
+                }
+                return this.Values.SequenceEqual(other.Values);
+            }
+        }
+
+        public T GetValue<T>(T defaultValue = default(T)) {
+            if (this.IsUnrecorded) {
+                return defaultValue;
+            }
+            return (T)this.Value;
+        }
+
+        public void SetValue(ColonistHistoryRecord other) {
+            if (this.IsList) {
+                this.Values = new List<object>(other.Values);
+            } else {
+                if (this.ValueType == typeof(int)) {
+                    this.Value = (int)other.Value;
+                    return;
+                } else if (this.ValueType == typeof(float)) {
+                    this.Value = (float)other.Value;
+                    return;
+                } else if (this.ValueType == typeof(string)) {
+                    string s = other.Value as string;
+                    if (s != null) {
+                        this.Value = String.Copy(s);
+                    } else {
+                        this.Value = null;
+                    }
+                    return;
+                }
+                Log.Warning("ValueType is " + this.ValueType);
+                this.Value = other.Value;
             }
         }
 

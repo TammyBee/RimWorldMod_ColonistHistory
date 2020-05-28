@@ -17,6 +17,9 @@ namespace ColonistHistory {
         private HashSet<RecordIdentifier> cacheAvailableRecords = null;
         private int cachedFirstRecordTick = -1;
 
+        private bool isLightWeightSave = false;
+        private Dictionary<Pawn, ColonistHistoryDataList> lightWeightColonistHistories = new Dictionary<Pawn, ColonistHistoryDataList>();
+
         private List<Pawn> tmpPawns = new List<Pawn>();
         private List<ColonistHistoryDataList> tmpColonistHistories = new List<ColonistHistoryDataList>();
 
@@ -196,7 +199,32 @@ namespace ColonistHistory {
             Scribe_Values.Look(ref this.lastManualRecordTick, "lastManualRecordTick", -1);
             Scribe_Values.Look(ref this.lastRecordIsManual, "lastRecordIsManual", false);
             Scribe_Values.Look(ref this.firstTile, "firstTile", -1);
-            Scribe_Collections.Look(ref this.colonistHistories, "colonistHistories", LookMode.Reference ,LookMode.Deep, ref this.tmpPawns, ref this.tmpColonistHistories);
+
+            if (Scribe.mode == LoadSaveMode.Saving) {
+                isLightWeightSave = ColonistHistoryMod.Settings.lightWeightSaveMode;
+            }
+            Scribe_Values.Look(ref isLightWeightSave, "isLightWeightSave", false);
+
+            if (isLightWeightSave) {
+                Log.Message("[Load]isLightWeightSave");
+                if (Scribe.mode == LoadSaveMode.Saving) {
+                    lightWeightColonistHistories = new Dictionary<Pawn, ColonistHistoryDataList>();
+                    foreach (Pawn p in this.colonistHistories.Keys) {
+                        lightWeightColonistHistories[p] = LightWeightSaver.GetLightWeight(this.colonistHistories[p]);
+                    }
+                }
+                Scribe_Collections.Look(ref lightWeightColonistHistories, "colonistHistories", LookMode.Reference, LookMode.Deep, ref this.tmpPawns, ref this.tmpColonistHistories);
+                Log.Message("dict:" + Scribe.mode + "/" + (lightWeightColonistHistories.EnumerableNullOrEmpty() ? "null or 0" : (lightWeightColonistHistories?.Keys?.Count).ToStringSafe()));
+                if (lightWeightColonistHistories?.Keys != null && lightWeightColonistHistories.Keys.Count > 0 && Scribe.mode != LoadSaveMode.Saving) {
+                    Log.Message("ConvertFromLightWeight:" + Scribe.mode);
+                    this.colonistHistories = new Dictionary<Pawn, ColonistHistoryDataList>();
+                    foreach (Pawn p in lightWeightColonistHistories.Keys) {
+                        this.colonistHistories[p] = LightWeightSaver.ConvertFromLightWeight(lightWeightColonistHistories[p]);
+                    }
+                }
+            } else {
+                Scribe_Collections.Look(ref this.colonistHistories, "colonistHistories", LookMode.Reference, LookMode.Deep, ref this.tmpPawns, ref this.tmpColonistHistories);
+            }
         }
 
         public void ResolveAvailableRecords() {

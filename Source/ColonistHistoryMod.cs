@@ -67,6 +67,8 @@ namespace ColonistHistory {
                 RecordGroup.ForceRedraw();
             }
 
+            listing_Standard.CheckboxLabeled("ColonistHistory.SettingsLightWeightSaveMode".Translate(), ref settings.lightWeightSaveMode, "ColonistHistory.SettingsLightWeightSaveModeDesc".Translate());
+
             listing_Standard.GapLine();
 
             listing_Standard.Label("ColonistHistory.SettingsTitleGraph".Translate());
