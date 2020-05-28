@@ -13,6 +13,10 @@ namespace ColonistHistory {
             this.records = new List<ColonistHistoryRecord>();
         }
 
+        public ColonistHistoryDataRecords(ColonistHistoryDataRecords records) {
+            this.records = new List<ColonistHistoryRecord>(records.records);
+        }
+
         public ColonistHistoryDataRecords(Pawn pawn) {
             this.records = new List<ColonistHistoryRecord>();
             foreach (ColonistHistoryDef colonistHistoryDef in ColonistHistoryMod.Settings.OutputColonistHistories) {

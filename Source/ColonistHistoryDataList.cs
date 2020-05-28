@@ -21,7 +21,13 @@ namespace ColonistHistory {
         }
 
         public ColonistHistoryDataList() {
+            this.pawnName = "";
+            this.log = new List<ColonistHistoryData>();
+        }
 
+        public ColonistHistoryDataList(string pawnName) {
+            this.pawnName = pawnName;
+            this.log = new List<ColonistHistoryData>();
         }
 
         public ColonistHistoryDataList(Pawn pawn) {

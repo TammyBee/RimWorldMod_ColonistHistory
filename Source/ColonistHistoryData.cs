@@ -21,6 +21,17 @@ namespace ColonistHistory {
             this.dateString = Utils.ConvertToDateTimeString(Find.TickManager.TicksAbs, tile);
         }
 
+        public ColonistHistoryData(ColonistHistoryData src, bool copyRecords) {
+            this.recordTick = src.recordTick;
+            this.forceRecord = src.forceRecord;
+            if (copyRecords) {
+                this.records = new ColonistHistoryDataRecords(src.records);
+            } else {
+                this.records = new ColonistHistoryDataRecords();
+            }
+            this.dateString = src.dateString;
+        }
+
         public ColonistHistoryRecord GetRecord(RecordIdentifier recordID, bool returnUnrecorded) {
             ColonistHistoryRecord record = this.records.records.Find(r => r.RecordID.Equals(recordID));
             if (record == null && returnUnrecorded) {
