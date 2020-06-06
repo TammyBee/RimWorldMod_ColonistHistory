@@ -33,7 +33,7 @@ namespace ColonistHistory {
 		public string GraphLabelY {
 			get {
 				if (this.graphLabelY == null) {
-					return "Value".TranslateSimple();
+					return "{0}";
 				}
 				return this.graphLabelY;
 			}

@@ -69,7 +69,7 @@ namespace ColonistHistory {
                     SimpleCurveDrawInfo simpleCurveDrawInfo = new SimpleCurveDrawInfo();
                     simpleCurveDrawInfo.color = Color.HSVToRGB((float)i / numOfColonist, 1f, 1f);
                     simpleCurveDrawInfo.label = pawn.Name.ToStringShort;
-                    simpleCurveDrawInfo.labelY = recordID.colonistHistoryDef.GraphLabelY;
+                    simpleCurveDrawInfo.valueFormat = recordID.colonistHistoryDef.GraphLabelY;
                     simpleCurveDrawInfo.curve = new SimpleCurve();
                     for (int j = 0; j < vectors.Count; j++) {
                         float x = vectors[j].x / 60000f;
