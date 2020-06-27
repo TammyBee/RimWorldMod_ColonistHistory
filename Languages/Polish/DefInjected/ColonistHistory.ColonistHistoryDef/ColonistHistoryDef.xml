@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+    <TMB_SkillLevelsInt.label>Poziom umiejętności(zmienna)</TMB_SkillLevelsInt.label>
+    <TMB_SkillLevelsInt.description>Zapisz poziom każdej umiejętności jako zmienną.</TMB_SkillLevelsInt.description>
+    <TMB_SkillLevelsInt.graphLabelY>Level {0}</TMB_SkillLevelsInt.graphLabelY>
+
+    <TMB_SkillLevelsFloat.label>Poziom umiejętności(Prawdziwy)</TMB_SkillLevelsFloat.label>
+    <TMB_SkillLevelsFloat.description>Zapisz poziom każdej umiejętności jako prawdziwą liczbę.</TMB_SkillLevelsFloat.description>
+    <TMB_SkillLevelsFloat.graphLabelY>Level {0}</TMB_SkillLevelsFloat.graphLabelY>
+
+    <TMB_AgeBiologicalYears.label>Lata</TMB_AgeBiologicalYears.label>
+    <TMB_AgeBiologicalYears.description>Zapisz poziom każdej umiejętności jako zmienną.</TMB_AgeBiologicalYears.description>
+    <TMB_AgeBiologicalYears.graphLabelY>Lat {0}</TMB_AgeBiologicalYears.graphLabelY>
+
+    <TMB_PrimaryEquipment.label>Ekwipunek</TMB_PrimaryEquipment.label>
+    <TMB_PrimaryEquipment.description>Zapisz tabelkę obecnego ekwipunku jako typ zmiennej string.</TMB_PrimaryEquipment.description>
+
+    <TMB_Hediffs.label>Hediffs</TMB_Hediffs.label>
+    <TMB_Hediffs.description>Zapisz tabelkę z obecnym hediff jako listę string.\nHediff:różnica zdrowia</TMB_Hediffs.description>
+
+    <TMB_RecordsMisc.label>Statystyki(Różne)</TMB_RecordsMisc.label>
+    <TMB_RecordsMisc.description>Zapisz wartość każdej statystyki(Różne) jako prawdziwą liczbę.</TMB_RecordsMisc.description>
+    <TMB_RecordsMisc.graphLabelY>{0}</TMB_RecordsMisc.graphLabelY>
+
+    <TMB_RecordsTime.label>Statystyki(Czas)</TMB_RecordsTime.label>
+    <TMB_RecordsTime.description>Zapisz wartość każdej statystyki(Czas) jako czas.</TMB_RecordsTime.description>
+    <TMB_RecordsTime.graphLabelY>{0}hours</TMB_RecordsTime.graphLabelY>
+
+</LanguageData>
