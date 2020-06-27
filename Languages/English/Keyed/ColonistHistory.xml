@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+	<!-- ColonistHistoryMod -->
+	<ColonistHistory.SettingsTitleGeneral>General</ColonistHistory.SettingsTitleGeneral>
+	<ColonistHistory.SettingsRecordingIntervalHours>Save interval: {0}</ColonistHistory.SettingsRecordingIntervalHours>
+	<ColonistHistory.SettingsSaveNullOrEmpty>Save even if the value is null or empty.</ColonistHistory.SettingsSaveNullOrEmpty>
+	<ColonistHistory.SettingsSaveFolderPath>Save folder path</ColonistHistory.SettingsSaveFolderPath>
+
+	<ColonistHistory.SettingsRecordOtherFactionPawn>Record colonists of other factions.</ColonistHistory.SettingsRecordOtherFactionPawn>
+	<ColonistHistory.SettingsShowOtherFactionPawn>Show colonists of other factions.</ColonistHistory.SettingsShowOtherFactionPawn>
+
+	<ColonistHistory.SettingsLightWeightSaveMode>Lightweight save mode (experimental)</ColonistHistory.SettingsLightWeightSaveMode>
+	<ColonistHistory.SettingsLightWeightSaveModeDesc>Reduces the file size of save data by saving only the differences in case of changes.</ColonistHistory.SettingsLightWeightSaveModeDesc>
+
+	<ColonistHistory.SettingsTitleGraph>Graph</ColonistHistory.SettingsTitleGraph>
+	<ColonistHistory.SettingsHighlightedCurveWidth>Highlighted curve width</ColonistHistory.SettingsHighlightedCurveWidth>
+	<ColonistHistory.SettingsTreatingUnrecordedAsZero>Treat unrecorded value as 0.</ColonistHistory.SettingsTreatingUnrecordedAsZero>
+	<ColonistHistory.SettingsAddZeroBeforeFirst>Add 0 before the first recorded value.</ColonistHistory.SettingsAddZeroBeforeFirst>
+
+	<ColonistHistory.SettingsTitleOutputRecords>Items to save</ColonistHistory.SettingsTitleOutputRecords>
+
+	<!-- MainTabWindow_ColonistHistory -->
+	<ColonistHistory.TabHome>Home</ColonistHistory.TabHome>
+	<ColonistHistory.TabTable>Table</ColonistHistory.TabTable>
+	<ColonistHistory.TabGraph>Graph</ColonistHistory.TabGraph>
+
+	<ColonistHistory.ForceRecordButton>Record current colonists.</ColonistHistory.ForceRecordButton>
+	<ColonistHistory.OutputRecordButton>Output</ColonistHistory.OutputRecordButton>
+
+	<ColonistHistory.NoRecord>None</ColonistHistory.NoRecord>
+	<ColonistHistory.LastRecordIsManual>(Manual)</ColonistHistory.LastRecordIsManual>
+	<ColonistHistory.LastRecordDateTime>Last record: {0} {1}</ColonistHistory.LastRecordDateTime>
+	<ColonistHistory.NextRecordTimeLeft>Next automatic recording in {0}</ColonistHistory.NextRecordTimeLeft>
+
+	<!-- GameComponent_ColonistHistoryRecorder -->
+	<ColonistHistory.SaveColonistHistoriesFileAs>Saved the colonist records with the following file name. "{0}"</ColonistHistory.SaveColonistHistoriesFileAs>
+
+	<!-- ColonistHistoryData -->
+	<ColonistHistory.DateString>{0} {1}</ColonistHistory.DateString>
+
+	<!-- ColonistHistoryWorker -->
+	<!-- {0}:LabelCap of ColonistHistoryDef / {1}:Label of Record -->
+	<ColonistHistory.ColonistHistoryRecordLabel>{0}:{1}</ColonistHistory.ColonistHistoryRecordLabel>
+
+	<!-- CHW_Health -->
+	<!-- {0}:LabelCap of Hediff / {1}:Label of BodyPart -->
+	<ColonistHistory.CHW_Hediffs_Label>{0} ({1})</ColonistHistory.CHW_Hediffs_Label>
+
+	<!-- ColonistHistoryRecord -->
+	<ColonistHistory.NullValue>null</ColonistHistory.NullValue>
+	<ColonistHistory.UnrecordedValue>Unrecorded</ColonistHistory.UnrecordedValue>
+
+	<!-- Dialog_RecordTableOption -->
+	<ColonistHistory.Dialog_RecordTableOptionTitle>Table Settings</ColonistHistory.Dialog_RecordTableOptionTitle>
+	<ColonistHistory.HideNullOrEmpty>Hide null and empty value.</ColonistHistory.HideNullOrEmpty>
+	<ColonistHistory.HideUnrecorded>Hide unrecorded value.</ColonistHistory.HideUnrecorded>
+
+	<!-- Dialog_NameSaveFile -->
+	<ColonistHistory.Dialog_NameSaveFileDesc>Please specify file name.</ColonistHistory.Dialog_NameSaveFileDesc>
+
+</LanguageData>

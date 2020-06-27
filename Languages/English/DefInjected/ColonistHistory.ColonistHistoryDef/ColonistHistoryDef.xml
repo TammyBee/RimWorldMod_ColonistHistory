@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+    <TMB_SkillLevelsInt.label>Skill level(Integer)</TMB_SkillLevelsInt.label>
+    <TMB_SkillLevelsInt.description>Save the level of each skill as integer.</TMB_SkillLevelsInt.description>
+    <TMB_SkillLevelsInt.graphLabelY>Level {0}</TMB_SkillLevelsInt.graphLabelY>
+
+    <TMB_SkillLevelsFloat.label>Skill level(Real)</TMB_SkillLevelsFloat.label>
+    <TMB_SkillLevelsFloat.description>Save the level of each skill as real number.</TMB_SkillLevelsFloat.description>
+    <TMB_SkillLevelsFloat.graphLabelY>Level {0}</TMB_SkillLevelsFloat.graphLabelY>
+
+    <TMB_AgeBiologicalYears.label>Age</TMB_AgeBiologicalYears.label>
+    <TMB_AgeBiologicalYears.description>Save the level of each skill as integer.</TMB_AgeBiologicalYears.description>
+    <TMB_AgeBiologicalYears.graphLabelY>Age {0}</TMB_AgeBiologicalYears.graphLabelY>
+
+    <TMB_PrimaryEquipment.label>Equipment</TMB_PrimaryEquipment.label>
+    <TMB_PrimaryEquipment.description>Save the label of current equipment as string.</TMB_PrimaryEquipment.description>
+
+    <TMB_Hediffs.label>Hediffs</TMB_Hediffs.label>
+    <TMB_Hediffs.description>Save the labels of current hediff as list of string.\nHediff:health difference</TMB_Hediffs.description>
+
+    <TMB_RecordsMisc.label>Statistics(Misc)</TMB_RecordsMisc.label>
+    <TMB_RecordsMisc.description>Save the value of each statistic(misc) as real number.</TMB_RecordsMisc.description>
+    <TMB_RecordsMisc.graphLabelY>{0}</TMB_RecordsMisc.graphLabelY>
+
+    <TMB_RecordsTime.label>Statistics(Time)</TMB_RecordsTime.label>
+    <TMB_RecordsTime.description>Save the value of each statistic(time) as time.</TMB_RecordsTime.description>
+    <TMB_RecordsTime.graphLabelY>{0}hours</TMB_RecordsTime.graphLabelY>
+
+</LanguageData>
