@@ -27,3 +27,10 @@ Recorded information can be checked in-game in tables and graphs.
 ## Settings
 ### Lightweight save mode(Experimental)
 - Reduces the file size of save data by saving only the differences in case of changes.
+
+## Languages
+- English
+- Japanese
+- Polish (by Rademenes16)
+
+If you show me the link of translation file, I will add language file to mod.
