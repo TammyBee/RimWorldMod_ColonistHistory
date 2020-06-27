@@ -17,5 +17,11 @@ namespace ColonistHistory {
                 yield return new ColonistHistoryRecord(skill.def, label, skill.Level, this.def);
             }
         }
+
+        public override IEnumerable<RecordIdentifier> GetRecordIDs() {
+            foreach (SkillDef skillDef in DefDatabase<SkillDef>.AllDefsListForReading.OrderByDescending(s => s.listOrder)) {
+                yield return new RecordIdentifier(def, skillDef);
+            }
+        }
     }
 }

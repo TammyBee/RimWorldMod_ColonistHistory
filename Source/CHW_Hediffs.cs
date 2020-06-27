@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using HarmonyLib;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,12 +17,12 @@ namespace ColonistHistory {
 
             List<object> values = new List<object>();
 
-            MethodInfo VisibleHediffGroupsInOrder = typeof(HealthCardUtility).GetMethod("VisibleHediffGroupsInOrder", BindingFlags.InvokeMethod | BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo VisibleHediffGroupsInOrder = AccessTools.Method(typeof(HealthCardUtility),"VisibleHediffGroupsInOrder");
             foreach (var grouping in (IEnumerable<IGrouping<BodyPartRecord, Hediff>>)VisibleHediffGroupsInOrder.Invoke(null, new object[] {p, true})) {
                 foreach (Hediff hediff in grouping) {
                     string label = hediff.LabelCap;
                     if (grouping.Key != null) {
-                        label = "ColonistHistoryWorker.CHW_Hediffs_Label".Translate(hediff.LabelCap, grouping.Key.LabelCap);
+                        label = "ColonistHistory.CHW_Hediffs_Label".Translate(hediff.LabelCap, grouping.Key.LabelCap);
                     }
                     values.Add(label);
                 }

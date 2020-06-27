@@ -10,8 +10,24 @@ namespace ColonistHistory {
         public string pawnName;
         public List<ColonistHistoryData> log;
 
-        public ColonistHistoryDataList() {
+        public HashSet<RecordIdentifier> AvailableRecords {
+            get {
+                HashSet<RecordIdentifier> records = new HashSet<RecordIdentifier>();
+                foreach (ColonistHistoryData data in log) {
+                    records.AddRange(data.records.records.ConvertAll(r => r.RecordID));
+                }
+                return records;
+            }
+        }
 
+        public ColonistHistoryDataList() {
+            this.pawnName = "";
+            this.log = new List<ColonistHistoryData>();
+        }
+
+        public ColonistHistoryDataList(string pawnName) {
+            this.pawnName = pawnName;
+            this.log = new List<ColonistHistoryData>();
         }
 
         public ColonistHistoryDataList(Pawn pawn) {

@@ -18,10 +18,26 @@ namespace ColonistHistory {
             this.recordTick = currentTick;
             this.forceRecord = forceRecord;
             this.records = new ColonistHistoryDataRecords(pawn);
+            this.dateString = Utils.ConvertToDateTimeString(Find.TickManager.TicksAbs, tile);
+        }
 
-            Vector2 vector = Find.WorldGrid.LongLatOf(tile);
-            string hourString = GenDate.HourInteger((long)Find.TickManager.TicksAbs, vector.x) + "LetterHour".Translate();
-            this.dateString = "ColonistHistoryWorker.DateString".Translate(GenDate.DateReadoutStringAt((long)Find.TickManager.TicksAbs, vector), hourString);
+        public ColonistHistoryData(ColonistHistoryData src, bool copyRecords) {
+            this.recordTick = src.recordTick;
+            this.forceRecord = src.forceRecord;
+            if (copyRecords) {
+                this.records = new ColonistHistoryDataRecords(src.records);
+            } else {
+                this.records = new ColonistHistoryDataRecords();
+            }
+            this.dateString = src.dateString;
+        }
+
+        public ColonistHistoryRecord GetRecord(RecordIdentifier recordID, bool returnUnrecorded) {
+            ColonistHistoryRecord record = this.records.records.Find(r => r.RecordID.Equals(recordID));
+            if (record == null && returnUnrecorded) {
+                return new ColonistHistoryRecord(recordID);
+            }
+            return record;
         }
 
         public void ExposeData() {

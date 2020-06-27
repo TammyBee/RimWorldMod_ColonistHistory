@@ -27,5 +27,13 @@ namespace ColonistHistory {
             }
             return base.GetValueAsString(record);
         }
+
+        public override IEnumerable<RecordIdentifier> GetRecordIDs() {
+            foreach (RecordDef recordDef in DefDatabase<RecordDef>.AllDefsListForReading) {
+                if (recordDef.type == RecordType.Int || recordDef.type == RecordType.Float) {
+                    yield return new RecordIdentifier(def, recordDef);
+                }
+            }
+        }
     }
 }

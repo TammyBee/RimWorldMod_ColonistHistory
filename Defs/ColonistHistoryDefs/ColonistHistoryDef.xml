@@ -8,6 +8,11 @@
         <workerClass>ColonistHistory.CHW_SkillLevelsInt</workerClass>
         <valueType>int</valueType>
         <defType>SkillDef</defType>
+        <graphLabelY>Level {0}</graphLabelY>
+        <useFixedScale>true</useFixedScale>
+        <fixedScale>(0, 21)</fixedScale>
+        <integersOnly>true</integersOnly>
+        <onlyPositiveValues>true</onlyPositiveValues>
     </ColonistHistory.ColonistHistoryDef>
 
     <ColonistHistory.ColonistHistoryDef>
@@ -18,6 +23,10 @@
         <defaultOutput>false</defaultOutput>
         <valueType>float</valueType>
         <defType>SkillDef</defType>
+        <graphLabelY>Level {0}</graphLabelY>
+        <useFixedScale>true</useFixedScale>
+        <fixedScale>(0, 21)</fixedScale>
+        <onlyPositiveValues>true</onlyPositiveValues>
     </ColonistHistory.ColonistHistoryDef>
 
     <ColonistHistory.ColonistHistoryDef>
@@ -26,6 +35,9 @@
         <description>Biological age as integer.</description>
         <workerClass>ColonistHistory.CHW_AgeBiologicalYears</workerClass>
         <valueType>int</valueType>
+        <graphLabelY>Age {0}</graphLabelY>
+        <integersOnly>true</integersOnly>
+        <onlyPositiveValues>true</onlyPositiveValues>
     </ColonistHistory.ColonistHistoryDef>
 
     <ColonistHistory.ColonistHistoryDef>
@@ -42,6 +54,7 @@
         <description>Hediffs as string list.</description>
         <workerClass>ColonistHistory.CHW_Hediffs</workerClass>
         <valueType>string</valueType>
+        <isValueList>true</isValueList>
     </ColonistHistory.ColonistHistoryDef>
 
     <ColonistHistory.ColonistHistoryDef>
@@ -60,6 +73,7 @@
         <workerClass>ColonistHistory.CHW_RecordsTime</workerClass>
         <valueType>int</valueType>
         <defType>RecordDef</defType>
+        <graphLabelY>{0} hours</graphLabelY>
     </ColonistHistory.ColonistHistoryDef>
 
 </Defs>
