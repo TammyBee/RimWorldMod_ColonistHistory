@@ -32,6 +32,8 @@ namespace ColonistHistory {
 
 		private ColonistHistoryData CurData {
 			get {
+
+				MainTabWindow_ColonistHistory.curDateIndex = Mathf.Clamp(MainTabWindow_ColonistHistory.curDateIndex, 0, CurRecords.log.Count - 1);
 				return CurRecords.log[MainTabWindow_ColonistHistory.curDateIndex];
 			}
 		}
