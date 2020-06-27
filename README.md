@@ -1,29 +1,29 @@
 # Colonist History
-一定間隔で入植者の情報を保存するMODです。  
-とりあえず試しに仮公開しました。  
-頻繁に更新を行っているため、互換性が無くなる可能性があります。  
+It is a mod to record information about the colonists at regular intervals.  
+Recorded information can be checked in-game in tables and graphs.
 
-## 機能
-- 一定間隔で入植者の各種情報を保存します。
-- 「入植者の歴史」タブを追加します。
-    - ホーム：手動で入植者の各種情報を保存したり、XMLファイルで出力したりできます。
-    - 表：任意の時間の入植者の各種情報を確認できます。
-    - グラフ：数値で保存された各種情報を時系列のグラフで確認できます。
+日本語版のREADMEは[こちら](README_jp.md)
 
-### 保存する情報
-- スキルレベル(整数)
-- スキルレベル(実数)
-- 健康状態
-- 装備中の武器
-- 年齢
-- 記録(その他)  
- 例: 殺害数、与えたダメージ 等
-- 記録(時間)  
- 例: 運搬(総時間) 等
+## Features
+- Record information about the colonists at regular intervals.
+- Add "Colonist History" tab(icon).
+    - Home：You can manually save the colonists' information and output it as XML file.
+    - Table：Show the colonists' information by time.
+    - Graph：Show the colonists' information recorded in numeric format as a time-series graph.
 
-## 設定
-### 軽量セーブモード
-- 変更があった場合の差分のみを保存することでセーブデータの容量を減らします。
+### Record Information
+- Skill level(Integer)
+- Skill level(Real number)
+- Hediffs
+- Equipment
+- Age
+- Statistics(Misc)  *1  
+ e.g.: Kills, Damage dealt
+- Statistics(Time)  *1  
+ e.g.: Time hauling
 
-## 予定
-- 出力したXMLファイルからサイト上で入植者の各種情報を確認できるようにする。
+*1 It also supports RecordDef added by other mods.
+
+## Settings
+### Lightweight save mode(Experimental)
+- Reduces the file size of save data by saving only the differences in case of changes.
