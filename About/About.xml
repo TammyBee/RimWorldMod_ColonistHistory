@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-	<name>Colonist History</name>
-	<author>民火</author>
-	<url></url>
-	<supportedVersions>
+    <name>Colonist History</name>
+    <author>民火</author>
+    <url></url>
+    <supportedVersions>
         <li>1.1</li>
-	</supportedVersions>
+    </supportedVersions>
     <packageId>tammybee.colonisthistory</packageId>
     <modDependencies>
         <li>
@@ -15,7 +15,34 @@
             <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
         </li>
     </modDependencies>
-	<description>
+    <description>
+The Mod to record information about the colonists at regular intervals.  
+Recorded information can be checked in-game in tables and graphs.
+
+# Features
+- Record information about the colonists at regular intervals.
+- Add "Colonist History" tab(icon).
+    - Home：You can manually save the colonists' information and output it as XML file.
+    - Table：Show the colonists' information by time.
+    - Graph：Show the colonists' information recorded in numeric format as a time-series graph.
+
+## Record Information
+- Skill level(Integer)
+- Skill level(Real number)
+- Hediffs
+- Equipment
+- Age
+- Statistics(Misc)  *1  
+ e.g.: Kills, Damage dealt
+- Statistics(Time)  *1  
+ e.g.: Time hauling
+
+*1 It also supports RecordDef added by other mods.
+
+# Settings
+## Lightweight save mode(Experimental)
+- Reduces the file size of save data by saving only the differences in case of changes.
+
 
 Twitter:@tammybee_tmb</description>
-	</ModMetaData>
+</ModMetaData>
