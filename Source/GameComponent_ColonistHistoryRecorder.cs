@@ -29,6 +29,12 @@ namespace ColonistHistory {
             }
         }
 
+        public Dictionary<Pawn, ColonistHistoryDataList> ColonistHistories {
+            get {
+                return this.colonistHistories;
+            }
+        }
+
         public int NextRecordTick {
             get {
                 if (this.LastAutoRecordTick != -1) {

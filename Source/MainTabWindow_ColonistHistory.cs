@@ -18,19 +18,25 @@ namespace ColonistHistory {
 
 		private static int curDateIndex = 0;
 
-		private GameComponent_ColonistHistoryRecorder CompRecorder {
+		public GameComponent_ColonistHistoryRecorder CompRecorder {
 			get {
 				return Current.Game.GetComponent<GameComponent_ColonistHistoryRecorder>();
 			}
 		}
 
-		private ColonistHistoryDataList CurRecords {
+		public ColonistHistoryDataList CurRecords {
 			get {
 				return CompRecorder.GetRecords(MainTabWindow_ColonistHistory.curPawn);
 			}
 		}
 
-		private ColonistHistoryData CurData {
+		public Pawn CurPawn {
+			get {
+				return MainTabWindow_ColonistHistory.curPawn;
+			}
+		}
+
+		public ColonistHistoryData CurData {
 			get {
 
 				MainTabWindow_ColonistHistory.curDateIndex = Mathf.Clamp(MainTabWindow_ColonistHistory.curDateIndex, 0, CurRecords.log.Count - 1);
@@ -147,6 +153,8 @@ namespace ColonistHistory {
 			float num = 0f;
 			float height = rect.height;
 
+			MainTabWindow_ColonistHistory.curDateIndex = Mathf.Clamp(MainTabWindow_ColonistHistory.curDateIndex, 0, CurRecords.log.Count - 1);
+			Log.Message(MainTabWindow_ColonistHistory.curDateIndex + "/" + CurRecords.log.Count);
 			{
 				Rect rectButton = new Rect(num, 0f, 140f, height);
 				if (Widgets.ButtonText(rectButton, MainTabWindow_ColonistHistory.curPawn.Name.ToStringShort)) {
@@ -208,6 +216,16 @@ namespace ColonistHistory {
 				}
 				num += rectButton.width;
 			}
+			num += 12f;
+			GUI.color = new Color(1f, 0.3f, 0.35f);
+			{
+				Rect rectButton = new Rect(num, 0f, 40f, height);
+				if (Widgets.ButtonText(rectButton, "x")) {
+					Find.WindowStack.Add(new Dialog_DeleteLog(this));
+				}
+				num += rectButton.width;
+			}
+			GUI.color = Color.white;
 
 			Text.Anchor = TextAnchor.UpperLeft;
 			GUI.EndGroup();

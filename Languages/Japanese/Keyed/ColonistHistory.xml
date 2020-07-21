@@ -59,4 +59,14 @@
 	<!-- Dialog_NameSaveFile -->
 	<ColonistHistory.Dialog_NameSaveFileDesc>ファイル名を指定してください.</ColonistHistory.Dialog_NameSaveFileDesc>
 
+	<!-- Dialog_DeleteLog -->
+	<ColonistHistory.Dialog_DeleteLogDesc>削除するログを指定してください.</ColonistHistory.Dialog_DeleteLogDesc>
+	<ColonistHistory.Dialog_DeleteLogTargetPawn>削除する対象</ColonistHistory.Dialog_DeleteLogTargetPawn>
+	<ColonistHistory.Dialog_DeleteLogTargetPawnAll>全員</ColonistHistory.Dialog_DeleteLogTargetPawnAll>
+	<ColonistHistory.Dialog_DeleteLogTargetDatetime>削除する期間</ColonistHistory.Dialog_DeleteLogTargetDatetime>
+	<ColonistHistory.Dialog_DeleteLogTargetDatetimeOnly>選択日時のみ</ColonistHistory.Dialog_DeleteLogTargetDatetimeOnly>
+	<ColonistHistory.Dialog_DeleteLogTargetDatetimeBefore>選択日時以前</ColonistHistory.Dialog_DeleteLogTargetDatetimeBefore>
+	<ColonistHistory.Dialog_DeleteLogTargetDatetimeAfter>選択日時以降</ColonistHistory.Dialog_DeleteLogTargetDatetimeAfter>
+	<ColonistHistory.ConfirmDeleteLog>指定したログを削除します.</ColonistHistory.ConfirmDeleteLog>
+
 </LanguageData>
