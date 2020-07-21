@@ -59,4 +59,14 @@
 	<!-- Dialog_NameSaveFile -->
 	<ColonistHistory.Dialog_NameSaveFileDesc>Please specify file name.</ColonistHistory.Dialog_NameSaveFileDesc>
 
+	<!-- Dialog_DeleteLog -->
+	<ColonistHistory.Dialog_DeleteLogDesc>Specify records to delete.</ColonistHistory.Dialog_DeleteLogDesc>
+	<ColonistHistory.Dialog_DeleteLogTargetPawn>Target Pawn</ColonistHistory.Dialog_DeleteLogTargetPawn>
+	<ColonistHistory.Dialog_DeleteLogTargetPawnAll>All</ColonistHistory.Dialog_DeleteLogTargetPawnAll>
+	<ColonistHistory.Dialog_DeleteLogTargetDatetime>Target Datetime</ColonistHistory.Dialog_DeleteLogTargetDatetime>
+	<ColonistHistory.Dialog_DeleteLogTargetDatetimeOnly>Only selected datetime</ColonistHistory.Dialog_DeleteLogTargetDatetimeOnly>
+	<ColonistHistory.Dialog_DeleteLogTargetDatetimeBefore>Before selected datetime</ColonistHistory.Dialog_DeleteLogTargetDatetimeBefore>
+	<ColonistHistory.Dialog_DeleteLogTargetDatetimeAfter>After selected datetime</ColonistHistory.Dialog_DeleteLogTargetDatetimeAfter>
+	<ColonistHistory.ConfirmDeleteLog>Delete records.</ColonistHistory.ConfirmDeleteLog>
+
 </LanguageData>
