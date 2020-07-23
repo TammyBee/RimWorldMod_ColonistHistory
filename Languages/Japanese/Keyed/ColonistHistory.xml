@@ -33,6 +33,8 @@
 	<ColonistHistory.LastRecordDateTime>最後に記録した日時: {0} {1}</ColonistHistory.LastRecordDateTime>
 	<ColonistHistory.NextRecordTimeLeft>次の自動記録まで {0}</ColonistHistory.NextRecordTimeLeft>
 
+	<ColonistHistory.ThereIsNoRecord>記録がありません.</ColonistHistory.ThereIsNoRecord>
+
 	<!-- GameComponent_ColonistHistoryRecorder -->
 	<ColonistHistory.SaveColonistHistoriesFileAs>入植者の記録を次のファイル名で保存しました. "{0}"</ColonistHistory.SaveColonistHistoriesFileAs>
 

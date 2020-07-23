@@ -109,7 +109,9 @@ namespace ColonistHistory {
         public IEnumerable<Pawn> Colonists {
             get {
                 foreach (Pawn p in this.colonistHistories.Keys.OrderBy(x => x.thingIDNumber)) {
-                    yield return p;
+                    if (!this.colonistHistories[p].log.NullOrEmpty()) {
+                        yield return p;
+                    }
                 }
             }
         }

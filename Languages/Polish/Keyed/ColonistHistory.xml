@@ -33,6 +33,8 @@
 	<ColonistHistory.LastRecordDateTime>Ostatnie nagranie: {0} {1}</ColonistHistory.LastRecordDateTime>
 	<ColonistHistory.NextRecordTimeLeft>Następne automatyczne nagranie: {0}</ColonistHistory.NextRecordTimeLeft>
 
+	<ColonistHistory.ThereIsNoRecord>There is no record.</ColonistHistory.ThereIsNoRecord>
+
 	<!-- GameComponent_ColonistHistoryRecorder -->
 	<ColonistHistory.SaveColonistHistoriesFileAs>Zapisano dokumentację kolonistów o następującej nazwie pliku. "{0}"</ColonistHistory.SaveColonistHistoriesFileAs>
 

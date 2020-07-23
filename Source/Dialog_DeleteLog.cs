@@ -77,6 +77,9 @@ namespace ColonistHistory {
 					DeleteLog(records, targetDatetime, this.parent.CurData.recordTick);
 				}
 			}
+			this.parent.RefreshDrawEntries();
+			RecordGraphUtility.Reset(this.parent.CompRecorder);
+			RecordGraphUtility.CurRecordGroup.ResolveGraph();
 		}
 
 		private void DeleteLog(ColonistHistoryDataList dataList, TargetDatetime targetDatetime, int targetTick) {

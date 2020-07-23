@@ -33,6 +33,8 @@
 	<ColonistHistory.LastRecordDateTime>Last record: {0} {1}</ColonistHistory.LastRecordDateTime>
 	<ColonistHistory.NextRecordTimeLeft>Next automatic recording in {0}</ColonistHistory.NextRecordTimeLeft>
 
+	<ColonistHistory.ThereIsNoRecord>There is no record.</ColonistHistory.ThereIsNoRecord>
+
 	<!-- GameComponent_ColonistHistoryRecorder -->
 	<ColonistHistory.SaveColonistHistoriesFileAs>Saved the colonist records with the following file name. "{0}"</ColonistHistory.SaveColonistHistoriesFileAs>
 
