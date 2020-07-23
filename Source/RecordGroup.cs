@@ -34,21 +34,23 @@ namespace ColonistHistory {
             this.cachedGraph = new Dictionary<Pawn, List<Vector2>>();
             if (this.comp != null) {
                 foreach (Pawn pawn in this.comp.Colonists) {
-                    this.cachedGraph[pawn] = new List<Vector2>();
                     ColonistHistoryDataList dataList = this.comp.GetRecords(pawn);
-                    if (dataList != null) {
-                        foreach (ColonistHistoryData data in dataList.log) {
-                            ColonistHistoryRecord record = data.GetRecord(recordID, false);
-                            if ((record != null && !record.IsUnrecorded) || ColonistHistoryMod.Settings.treatingUnrecordedAsZero) {
-                                float x = GenDate.TickAbsToGame(data.recordTick);
-                                float y = 0f;
-                                if (record != null) {
-                                    y = record.ValueForGraph;
+                    if (!dataList.log.NullOrEmpty()) {
+                        this.cachedGraph[pawn] = new List<Vector2>();
+                        if (dataList != null) {
+                            foreach (ColonistHistoryData data in dataList.log) {
+                                ColonistHistoryRecord record = data.GetRecord(recordID, false);
+                                if ((record != null && !record.IsUnrecorded) || ColonistHistoryMod.Settings.treatingUnrecordedAsZero) {
+                                    float x = GenDate.TickAbsToGame(data.recordTick);
+                                    float y = 0f;
+                                    if (record != null) {
+                                        y = record.ValueForGraph;
+                                    }
+                                    if (this.cachedGraph[pawn].Count == 0 && ColonistHistoryMod.Settings.addZeroBeforeFirst) {
+                                        this.cachedGraph[pawn].Add(new Vector2(x - 0.001f, 0));
+                                    }
+                                    this.cachedGraph[pawn].Add(new Vector2(x, y));
                                 }
-                                if (this.cachedGraph[pawn].Count == 0 && ColonistHistoryMod.Settings.addZeroBeforeFirst) {
-                                    this.cachedGraph[pawn].Add(new Vector2(x - 0.001f, 0));
-                                }
-                                this.cachedGraph[pawn].Add(new Vector2(x, y));
                             }
                         }
                     }
@@ -62,8 +64,11 @@ namespace ColonistHistory {
                 this.cachedGraphTickCount = ticksGame;
                 this.curves.Clear();
                 int i = 0;
-                int numOfColonist = this.comp.Colonists.Where(p => ColonistHistoryMod.Settings.showOtherFactionPawn || !p.ExistExtraNoPlayerFactions()).Count();
-                foreach (Pawn pawn in this.comp.Colonists.Where(p => ColonistHistoryMod.Settings.showOtherFactionPawn || !p.ExistExtraNoPlayerFactions())) {
+                Func<Pawn, bool> pred = delegate (Pawn p) {
+                    return (ColonistHistoryMod.Settings.showOtherFactionPawn || !p.ExistExtraNoPlayerFactions());
+                };
+                int numOfColonist = this.comp.Colonists.Where(pred).Count();
+                foreach (Pawn pawn in this.comp.Colonists.Where(pred)) {
                     List<Vector2> vectors = this.cachedGraph[pawn];
 
                     SimpleCurveDrawInfo simpleCurveDrawInfo = new SimpleCurveDrawInfo();

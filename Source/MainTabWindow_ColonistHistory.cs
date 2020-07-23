@@ -18,19 +18,25 @@ namespace ColonistHistory {
 
 		private static int curDateIndex = 0;
 
-		private GameComponent_ColonistHistoryRecorder CompRecorder {
+		public GameComponent_ColonistHistoryRecorder CompRecorder {
 			get {
 				return Current.Game.GetComponent<GameComponent_ColonistHistoryRecorder>();
 			}
 		}
 
-		private ColonistHistoryDataList CurRecords {
+		public ColonistHistoryDataList CurRecords {
 			get {
 				return CompRecorder.GetRecords(MainTabWindow_ColonistHistory.curPawn);
 			}
 		}
 
-		private ColonistHistoryData CurData {
+		public Pawn CurPawn {
+			get {
+				return MainTabWindow_ColonistHistory.curPawn;
+			}
+		}
+
+		public ColonistHistoryData CurData {
 			get {
 
 				MainTabWindow_ColonistHistory.curDateIndex = Mathf.Clamp(MainTabWindow_ColonistHistory.curDateIndex, 0, CurRecords.log.Count - 1);
@@ -133,6 +139,10 @@ namespace ColonistHistory {
 		}
 
 		private void DoTablePage(Rect rect) {
+			if (CompRecorder.Colonists.EnumerableNullOrEmpty()) {
+				Widgets.Label(new Rect(rect.x + 4f, rect.y + 4f, rect.width, 32f), "ColonistHistory.ThereIsNoRecord".Translate());
+				return;
+			}
 			rect.yMin += 16f;
 			DrawHeaderOnTable(new Rect(rect.x, rect.y, rect.width, 32f));
 
@@ -147,15 +157,20 @@ namespace ColonistHistory {
 			float num = 0f;
 			float height = rect.height;
 
+			MainTabWindow_ColonistHistory.curDateIndex = Mathf.Clamp(MainTabWindow_ColonistHistory.curDateIndex, 0, CurRecords.log.Count - 1);
+			//Log.Message(MainTabWindow_ColonistHistory.curDateIndex + "/" + CurRecords.log.Count);
 			{
 				Rect rectButton = new Rect(num, 0f, 140f, height);
 				if (Widgets.ButtonText(rectButton, MainTabWindow_ColonistHistory.curPawn.Name.ToStringShort)) {
 					List<FloatMenuOption> list = new List<FloatMenuOption>();
-					foreach (Pawn colonist in CompRecorder.Colonists.Where(p => ColonistHistoryMod.Settings.showOtherFactionPawn || !p.ExistExtraNoPlayerFactions())) {
-						Log.Message(colonist.Name.ToStringShort + "/" + colonist.GetExtraHomeFaction().ToStringSafe() + ":" + colonist.GetExtraHostFaction().ToStringSafe());
+					Func<Pawn, bool> pred = delegate (Pawn p) {
+						return (ColonistHistoryMod.Settings.showOtherFactionPawn || !p.ExistExtraNoPlayerFactions());
+					};
+					foreach (Pawn colonist in CompRecorder.Colonists.Where(pred)) {
+						//Log.Message(colonist.Name.ToStringShort + "/" + colonist.GetExtraHomeFaction().ToStringSafe() + ":" + colonist.GetExtraHostFaction().ToStringSafe());
 						Pawn p = colonist;
 						list.Add(new FloatMenuOption(p.Name.ToStringShort, delegate () {
-							int previousSelectedRecordsTick = this.CurData.recordTick;
+							int previousSelectedRecordsTick = !CurRecords.log.NullOrEmpty() ? this.CurData.recordTick : 0;
 							MainTabWindow_ColonistHistory.curPawn = p;
 							int nextIndex = CurRecords.log.FindIndex(data => data.recordTick == previousSelectedRecordsTick);
 							if (nextIndex == -1) {
@@ -172,27 +187,29 @@ namespace ColonistHistory {
 			num += 12f;
 
 			Pawn pawn = MainTabWindow_ColonistHistory.curPawn;
+			int logCount = CompRecorder.GetRecords(pawn).log.Count;
 			int lastIndex = CompRecorder.GetRecords(pawn).log.Count - 1;
 			int currentIndex = curDateIndex;
 			{
 				Rect rectButton = new Rect(num, 0f, height, height);
-				if (Widgets.ButtonText(rectButton, "<") && curDateIndex > 0) {
+				if (logCount > 0 && Widgets.ButtonText(rectButton, "<") && curDateIndex > 0) {
 					curDateIndex--;
 				}
 				num += rectButton.width;
 			}
 			num += 4f;
 			{
-				string labelSlider = CompRecorder.GetRecords(pawn).log[curDateIndex].dateString;
-
 				Rect rectSlider = new Rect(num, 0f, 640f, height);
-				curDateIndex = Mathf.RoundToInt(Widgets.HorizontalSlider(rectSlider, curDateIndex, 0f, lastIndex, true, labelSlider));
+				if (logCount > 0) {
+					string labelSlider = CompRecorder.GetRecords(pawn).log[curDateIndex].dateString;
+					curDateIndex = Mathf.RoundToInt(Widgets.HorizontalSlider(rectSlider, curDateIndex, 0f, lastIndex, true, labelSlider));
+				}
 				num += rectSlider.width;
 			}
 			num += 4f;
 			{
 				Rect rectButton = new Rect(num, 0f, height, height);
-				if (Widgets.ButtonText(rectButton, ">") && curDateIndex < lastIndex) {
+				if (logCount > 0 && Widgets.ButtonText(rectButton, ">") && curDateIndex < lastIndex) {
 					curDateIndex++;
 				}
 				num += rectButton.width;
@@ -208,6 +225,16 @@ namespace ColonistHistory {
 				}
 				num += rectButton.width;
 			}
+			num += 12f;
+			GUI.color = new Color(1f, 0.3f, 0.35f);
+			{
+				Rect rectButton = new Rect(num, 0f, 40f, height);
+				if (Widgets.ButtonText(rectButton, "x")) {
+					Find.WindowStack.Add(new Dialog_DeleteLog(this));
+				}
+				num += rectButton.width;
+			}
+			GUI.color = Color.white;
 
 			Text.Anchor = TextAnchor.UpperLeft;
 			GUI.EndGroup();
@@ -220,10 +247,23 @@ namespace ColonistHistory {
 		}
 
 		public void RefreshDrawEntries() {
-			RecordReportUtility.ResolveDrawEntries(this.CurData);
+			if (!CurRecords.log.NullOrEmpty()) {
+				RecordReportUtility.ResolveDrawEntries(this.CurData);
+			} else {
+				if (this.CompRecorder.Colonists.EnumerableNullOrEmpty()) {
+					RecordReportUtility.Reset();
+				} else {
+					MainTabWindow_ColonistHistory.curPawn = this.CompRecorder.Colonists.First();
+					RecordReportUtility.ResolveDrawEntries(this.CurData);
+				}
+			}
 		}
 
 		private void DoGraphPage(Rect rect) {
+			if (CompRecorder.Colonists.EnumerableNullOrEmpty()) {
+				Widgets.Label(new Rect(rect.x + 4f, rect.y + 4f, rect.width, 32f), "ColonistHistory.ThereIsNoRecord".Translate());
+				return;
+			}
 			RecordGraphUtility.Draw(rect);
 		}
 

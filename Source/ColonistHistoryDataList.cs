@@ -46,5 +46,21 @@ namespace ColonistHistory {
             Scribe_Values.Look(ref this.pawnName, "pawnName");
             Scribe_Collections.Look(ref this.log, "log", LookMode.Deep);
         }
+
+        public void DeleteLog(int recordTick) {
+            this.log.RemoveAll(log => log.recordTick == recordTick);
+        }
+
+        public void DeleteLogRange(int beginTick,int endTick) {
+            Predicate<ColonistHistoryData> match = delegate (ColonistHistoryData data) {
+                if (beginTick == -1) {
+                    return data.recordTick <= endTick;
+                } else if (endTick == -1) {
+                    return data.recordTick >= beginTick;
+                }
+                return data.recordTick >= beginTick && data.recordTick <= endTick;
+            };
+            this.log.RemoveAll(match);
+        }
     }
 }
