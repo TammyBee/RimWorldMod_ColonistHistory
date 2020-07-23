@@ -105,7 +105,6 @@ namespace ColonistHistory {
 				}
 				FloatMenu window = new FloatMenu(list, "SelectGraph".Translate(), false);
 				Find.WindowStack.Add(window);
-				PlayerKnowledgeDatabase.KnowledgeDemonstrated(ConceptDefOf.HistoryTab, KnowledgeAmount.Total);
 			}
 			if (RecordGraphUtility.CurRecordID.IsVaild) {
 				Text.Anchor = TextAnchor.MiddleLeft;
