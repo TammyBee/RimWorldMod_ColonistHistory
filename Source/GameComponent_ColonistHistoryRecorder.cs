@@ -212,7 +212,7 @@ namespace ColonistHistory {
             Scribe_Values.Look(ref isLightWeightSave, "isLightWeightSave", false);
 
             if (isLightWeightSave) {
-                Log.Message("[Load]isLightWeightSave");
+                //Log.Message("[Load]isLightWeightSave");
                 if (Scribe.mode == LoadSaveMode.Saving) {
                     lightWeightColonistHistories = new Dictionary<Pawn, ColonistHistoryDataList>();
                     foreach (Pawn p in this.colonistHistories.Keys) {
@@ -220,9 +220,9 @@ namespace ColonistHistory {
                     }
                 }
                 Scribe_Collections.Look(ref lightWeightColonistHistories, "colonistHistories", LookMode.Reference, LookMode.Deep, ref this.tmpPawns, ref this.tmpColonistHistories);
-                Log.Message("dict:" + Scribe.mode + "/" + (lightWeightColonistHistories.EnumerableNullOrEmpty() ? "null or 0" : (lightWeightColonistHistories?.Keys?.Count).ToStringSafe()));
+                //Log.Message("dict:" + Scribe.mode + "/" + (lightWeightColonistHistories.EnumerableNullOrEmpty() ? "null or 0" : (lightWeightColonistHistories?.Keys?.Count).ToStringSafe()));
                 if (lightWeightColonistHistories?.Keys != null && lightWeightColonistHistories.Keys.Count > 0 && Scribe.mode != LoadSaveMode.Saving) {
-                    Log.Message("ConvertFromLightWeight:" + Scribe.mode);
+                    //Log.Message("ConvertFromLightWeight:" + Scribe.mode);
                     this.colonistHistories = new Dictionary<Pawn, ColonistHistoryDataList>();
                     foreach (Pawn p in lightWeightColonistHistories.Keys) {
                         this.colonistHistories[p] = LightWeightSaver.ConvertFromLightWeight(lightWeightColonistHistories[p]);

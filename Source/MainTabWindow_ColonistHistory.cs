@@ -154,13 +154,13 @@ namespace ColonistHistory {
 			float height = rect.height;
 
 			MainTabWindow_ColonistHistory.curDateIndex = Mathf.Clamp(MainTabWindow_ColonistHistory.curDateIndex, 0, CurRecords.log.Count - 1);
-			Log.Message(MainTabWindow_ColonistHistory.curDateIndex + "/" + CurRecords.log.Count);
+			//Log.Message(MainTabWindow_ColonistHistory.curDateIndex + "/" + CurRecords.log.Count);
 			{
 				Rect rectButton = new Rect(num, 0f, 140f, height);
 				if (Widgets.ButtonText(rectButton, MainTabWindow_ColonistHistory.curPawn.Name.ToStringShort)) {
 					List<FloatMenuOption> list = new List<FloatMenuOption>();
 					foreach (Pawn colonist in CompRecorder.Colonists.Where(p => ColonistHistoryMod.Settings.showOtherFactionPawn || !p.ExistExtraNoPlayerFactions())) {
-						Log.Message(colonist.Name.ToStringShort + "/" + colonist.GetExtraHomeFaction().ToStringSafe() + ":" + colonist.GetExtraHostFaction().ToStringSafe());
+						//Log.Message(colonist.Name.ToStringShort + "/" + colonist.GetExtraHomeFaction().ToStringSafe() + ":" + colonist.GetExtraHostFaction().ToStringSafe());
 						Pawn p = colonist;
 						list.Add(new FloatMenuOption(p.Name.ToStringShort, delegate () {
 							int previousSelectedRecordsTick = this.CurData.recordTick;
