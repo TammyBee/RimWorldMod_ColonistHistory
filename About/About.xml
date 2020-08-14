@@ -5,6 +5,7 @@
     <url></url>
     <supportedVersions>
         <li>1.1</li>
+        <li>1.2</li>
     </supportedVersions>
     <packageId>tammybee.colonisthistory</packageId>
     <modDependencies>
@@ -16,7 +17,7 @@
         </li>
     </modDependencies>
     <description>
-The Mod to record information about the colonists at regular intervals.  
+The Mod to record information about the colonists at regular intervals.
 Recorded information can be checked in-game in tables and graphs.
 
 # Features
@@ -32,9 +33,9 @@ Recorded information can be checked in-game in tables and graphs.
 - Hediffs
 - Equipment
 - Age
-- Statistics(Misc)  *1  
+- Statistics(Misc)  *1
  e.g.: Kills, Damage dealt
-- Statistics(Time)  *1  
+- Statistics(Time)  *1
  e.g.: Time hauling
 
 *1 It also supports RecordDef added by other mods.
